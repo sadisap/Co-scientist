@@ -116,40 +116,6 @@ The experiment also leaves an important comparison unresolved: whether improveme
 
 The complete first experiment is saved in [`results/`](results/).
 
-## Project Structure
-
-```text
-coscientist/
-├── agents/
-│   ├── generation.py
-│   ├── reflection.py
-│   ├── ranking.py
-│   ├── evolution.py
-│   ├── proximity.py
-│   └── meta_review.py
-│
-├── core/
-│   ├── llm.py
-│   ├── state.py
-│   └── supervisor.py
-│
-├── models/
-│   └── hypothesis.py
-│
-├── tools/
-│   └── literature.py
-│
-├── experiments/
-│   ├── baseline.py
-│   ├── evaluator.py
-│   ├── multi_agent.py
-│   └── save_results.py
-│
-├── results/
-├── main.py
-└── requirements.txt
-```
-
 ## Running Locally
 
 Requirements:
