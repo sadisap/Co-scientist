@@ -36,7 +36,7 @@ def search_literature(
     """
 
     params = {
-        "search": query,
+        "search": query.rstrip("?.! "),
         "per-page": limit,
     }
 
