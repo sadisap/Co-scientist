@@ -1,0 +1,46 @@
+{
+  "question_id": "Q1",
+  "research_goal": "How can AI systems reduce hallucinations when generating scientific hypotheses?",
+  "papers": [
+    {
+      "id": "https://openalex.org/W4402923059",
+      "title": "AI hallucination: towards a comprehensive classification of distorted information in artificial intelligence-generated content",
+      "abstract": "Amidst the burgeoning information age, the rapid development of artificial intelligence-generated content (AIGC) has brought forth challenges regarding information authenticity. The proliferation of distorted information significantly impacts users negatively. This study aims to systematically categorize distorted information within AIGC, delve into its internal characteristics, and provide theoretical guidance for its management. Utilizing ChatGPT as a case study, we conducted empirical content analysis on 243 instances of distorted information collected, comprising both questions and answers. Three coders meticulously interpreted each instance of distorted information, encoding error points based on a predefined coding scheme and categorizing them according to error type. Our objective was to refine and validate the distorted information category list derived from the review through multiple rounds of pre-coding and test coding, thereby yielding a comprehensive and clearly delineated category list of distorted information in AIGC. The findings identified 8 first-level error types: \u201cOverfitting\u201d; \u201cLogic errors\u201d; \u201cReasoning errors\u201d; \u201cMathematical errors\u201d; \u201cUnfounded fabrication\u201d; \u201cFactual errors\u201d; \u201cText output errors\u201d; and \u201cOther errors\u201d, further subdivided into 31 second-level error types. This classification list not only lays a solid foundation for studying risks associated with AIGC but also holds significant practical implications for helping users identify distorted information and enabling developers to enhance the quality of AI-generated tools.",
+      "publication_year": 2024,
+      "doi": "https://doi.org/10.1057/s41599-024-03811-x",
+      "cited_by_count": 329
+    },
+    {
+      "id": "https://openalex.org/W4412158322",
+      "title": "\ud83e\udddcSiren\u2019s Song in the AI Ocean: A Survey on Hallucination in Large Language Models",
+      "abstract": "Abstract While large language models (LLMs) have demonstrated remarkable capabilities across a range of downstream tasks, a significant concern revolves around their propensity to exhibit hallucinations: LLMs occasionally generate content that diverges from the user input, contradicts previously generated context, or misaligns with established world knowledge. This phenomenon poses a substantial challenge to the reliability of LLMs in real-world scenarios. In this article, we survey recent efforts on the detection, explanation, and mitigation of hallucination, with an emphasis on the unique challenges posed by LLMs. We present taxonomies of the LLM hallucination phenomena and evaluation benchmarks, analyze existing approaches aiming at mitigating LLM hallucination, and discuss potential directions for future research.",
+      "publication_year": 2025,
+      "doi": "https://doi.org/10.1162/coli.a.16",
+      "cited_by_count": 535
+    },
+    {
+      "id": "https://openalex.org/W4412637191",
+      "title": "EFFECTS OF AI HALLUCINATIONS ON MILITARY SYSTEMS",
+      "abstract": "This article examines the effects of AI hallucinations across three critical military domains: weapons systems, intelligence, surveillance, and reconnaissance (ISR) systems, and command and control systems. By analyzing the specific vulnerabilities, potential consequences, and mitigation strategies in each domain, we aim to provide military personnel and policymakers with a comprehensive understanding of this emerging challenge. The article concludes with policy recommendations designed to address the risks of AI hallucinations while preserving the benefits of AI integration in military applications.",
+      "publication_year": 2025,
+      "doi": "https://doi.org/10.56082/annalsarscimilit.2025.2.13",
+      "cited_by_count": 1
+    },
+    {
+      "id": "https://openalex.org/W4407602158",
+      "title": "Hallucination in AI-generated financial literature reviews: evaluating bibliographic accuracy",
+      "abstract": "",
+      "publication_year": 2025,
+      "doi": "https://doi.org/10.1007/s41060-025-00731-0",
+      "cited_by_count": 10
+    },
+    {
+      "id": "https://openalex.org/W7221625376",
+      "title": "Naming Is Not Explaining: Intelligence, Consciousness, and Hallucination in AI Research",
+      "abstract": "",
+      "publication_year": 2026,
+      "doi": "https://doi.org/10.2139/ssrn.7604119",
+      "cited_by_count": 0
+    }
+  ]
+}

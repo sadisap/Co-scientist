@@ -1,0 +1,46 @@
+{
+  "question_id": "Q3",
+  "research_goal": "Does iterative critique improve the testability of LLM-generated scientific hypotheses?",
+  "papers": [
+    {
+      "id": "https://openalex.org/W7122572906",
+      "title": "Do LLMs Possess Strategic Intelligence? Testing LLMs in Iterated Prisoner\u2019s Dilemmas",
+      "abstract": "Abstract This study systematically evaluates the strategic capabilities of large language models through evolutionary tournaments in the Iterated Prisoner's Dilemma. We tested 28 agents, including 12 contemporary large language models from four major providers (OpenAI, Anthropic, Google, Mistral), 13 canonical game theory strategies, and 3 adaptive learning algorithms across varying interaction horizons, temperatures, and memory conditions. The experimental framework employed five-phase evolutionary tournaments with fitness-proportional selection, examining both anonymous memory and opponent tracking mechanisms to investigate how historical information impacts strategic behaviour. Results reveal that most large language models maintained high cooperation rates even in short-horizon scenarios where game theory predicts universal defection, with only GPT-5-mini demonstrating sophisticated horizon-sensitive strategic adaptation. To deepen understanding, future evaluations should include longer games, deeper tournaments, expanded cross-model comparisons, and richer environmental variations to more reliably characterise strategic behaviour across horizons and evolutionary depth.",
+      "publication_year": 2026,
+      "doi": "https://doi.org/10.21203/rs.3.rs-8405969/v1",
+      "cited_by_count": 0
+    },
+    {
+      "id": "https://openalex.org/W7213224631",
+      "title": "HypoEvolve: Genetic Algorithms Enable Multi-Agent LLMs to Discover Scientific Hypotheses",
+      "abstract": "Scientific agents contribute to hypothesis discovery by synthesizing evidence, assessing proposals, and developing new explanations. Recent systems combine scientific agents with evolutionary search through critique, comparison, and revision. However, how different forms of agent collaboration affect hypothesis quality remains an open question. Answering this question requires separating the effects of agents' scientific capabilities from those of their collaboration. A framework must therefore preserve agents' scientific roles and support rules for combining, revising, and retaining hypotheses. Building on this view, we introduce HypoEvolve, which makes collaboration explicit through successive updates to a hypothesis population. Specifically, we propose a generational genetic algorithm to coordinate specialized large language model (LLM) agents that integrate mechanistic arguments, reconsider assumptions, and assess evidence and testability. Each generation specifies how scientific judgments and new proposals reshape the population, making collaboration effects on hypothesis quality directly testable. Moreover, we design our evaluation around scientifically meaningful hypotheses that explain how a proposed intervention could work. Drug repurposing links these explanations to target-level biological claims assessed against external evidence. Specifically, we adapt DepMap and Open Targets into complementary external measures grounded in experimental, genetic, and clinical evidence. Across 34 cancer types, HypoEvolve achieves the highest scores against six baselines on both measures. DepMap selectivity reaches 0.171, versus 0.115 for the strongest baseline. Gains over single-pass generation also generalize to held-out cancer types. HypoEvolve advances a vision of autonomous science in which AI research teams achieve a capacity for discovery beyond that of individual models.",
+      "publication_year": 2026,
+      "doi": "https://doi.org/10.48550/arxiv.2609.15938",
+      "cited_by_count": 0
+    },
+    {
+      "id": "https://openalex.org/W4404312776",
+      "title": "Nova: An Iterative Planning and Search Approach to Enhance Novelty and Diversity of LLM Generated Ideas",
+      "abstract": "Scientific innovation is pivotal for humanity, and harnessing large language models (LLMs) to generate research ideas could transform discovery. However, existing LLMs often produce simplistic and repetitive suggestions due to their limited ability in acquiring external knowledge for innovation. To address this problem, we introduce an enhanced planning and search methodology designed to boost the creative potential of LLM-based systems. Our approach involves an iterative process to purposely plan the retrieval of external knowledge, progressively enriching the idea generation with broader and deeper insights. Validation through automated and human assessments indicates that our framework substantially elevates the quality of generated ideas, particularly in novelty and diversity. The number of unique novel ideas produced by our framework is 3.4 times higher than without it. Moreover, our method outperforms the current state-of-the-art, generating at least 2.5 times more top-rated ideas based on 170 seed papers in a Swiss Tournament evaluation.",
+      "publication_year": 2024,
+      "doi": "https://doi.org/10.48550/arxiv.2410.14255",
+      "cited_by_count": 5
+    },
+    {
+      "id": "https://openalex.org/W4417088765",
+      "title": "Towards Scientific Intelligence: A Survey of LLM-based Scientific Agents",
+      "abstract": "As scientific research becomes increasingly complex, innovative tools are needed to manage vast data, facilitate interdisciplinary collaboration, and accelerate discovery. Large language models (LLMs) are now evolving into LLM-based scientific agents that automate critical tasks ranging from hypothesis generation and experiment design to data analysis and simulation. Unlike general-purpose LLMs, these specialized agents integrate domain-specific knowledge, advanced tool sets, and robust validation mechanisms, enabling them to handle complex data types, ensure reproducibility, and drive scientific breakthroughs. This survey provides a focused review of the architectures, design, benchmarks, applications, and ethical considerations surrounding LLM-based scientific agents. We highlight why they differ from general agents and the ways in which they advance research across various scientific fields. By examining their development and challenges, this survey offers a comprehensive roadmap for researchers and practitioners to harness these agents for more efficient, reliable, and ethically sound scientific discovery.",
+      "publication_year": 2025,
+      "doi": "https://doi.org/10.48550/arxiv.2503.24047",
+      "cited_by_count": 7
+    },
+    {
+      "id": "https://openalex.org/W7224899167",
+      "title": "Beyond Passing Tests: A Systematic Review and Controlled Re-evaluation of Techniques for Improving the Quality of LLM-Generated Code",
+      "abstract": "Large language models pass most functional-correctness benchmarks, but passing tests says little about whether their code is readable, efficient or secure. Many techniques claim to improve these qualities, yet their evidence is scattered, usually covers one quality dimension and is rarely compared at an equal compute budget. We contribute a systematic review and a controlled re-evaluation. A systematic literature review of 628 primary studies (July 2021 to October 2026), with disclosed, author-reviewed LLM assistance, organizes the techniques by stage, signal source and quality target. Most studies measure only the dimension they target, gains often come with unchanged or unreported correctness, single automated quality signals are gamed, and compute, variance and contamination are rarely reported. A controlled re-evaluation runs ten techniques on four models at matched budgets on correctness, maintainability, efficiency and security benchmarks, extends it to thirteen current models and repository-level tasks, and compares 66 highlighted techniques head-to-head on Gemma 4 31B. At one call, quality prompting raises analyzer issue counts and leaves complexity and judge scores almost unchanged. At matched budgets, best-of-n sampling with an analyzer-weighted ranker matches or beats prompting, planning, self-refinement, a reviewer agent and retrieval on measures the ranker does not optimize, while an analyzer feedback loop and fine-tuning beat it only on analyzer issue counts. Large correctness losses on HumanEval+, a likely contaminated benchmark near its ceiling, do not appear on contests held after the models' training cutoffs. In the head-to-head, 1 of 66 techniques beats best-of-n on its primary target beyond the 95% interval, a rate consistent with chance. Gains should be reported against a budget-matched sampling baseline and on measures independent of the technique's own signal.",
+      "publication_year": 2026,
+      "doi": "https://doi.org/10.48550/arxiv.2610.38977",
+      "cited_by_count": 0
+    }
+  ]
+}
