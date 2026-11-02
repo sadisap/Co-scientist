@@ -1,127 +1,51 @@
-# Mini AI Co-Scientist
+# Mini AI Co-scientist
 
-A small-scale implementation of a multi-agent scientific reasoning system inspired by Google's AI Co-Scientist architecture.
+A small multi-agent system for generating and evaluating scientific research hypotheses, inspired by Google's AI Co-Scientist.
 
-The system takes a research goal, retrieves relevant literature, generates candidate hypotheses, critiques and ranks them, evolves promising candidates, and produces a final research roadmap.
+The project explores whether using specialized LLM agents produces better research hypotheses than a single-agent approach.
 
-## Architecture
+## How It Works
 
-```text
-                         Research Goal
-                              |
-                         OpenAlex Search
-                              |
-                      Retrieved Literature
-                              |
-                         Supervisor
-                              |
-        +---------------------+---------------------+
-        |                     |                     |
-        v                     v                     v
-    Generation           Reflection            Proximity
-        |                (peer review)         (similarity)
-        |                     |                     |
-        +---------------------+---------------------+
-                              |
-                              v
-                        Elo Tournament
-                              |
-                       Top Hypotheses
-                              |
-                              v
-                          Evolution
-                     (refine + combine)
-                              |
-                              +-----> repeat
-                              |
-                              v
-                         Meta-Review
-                              |
-                              v
-                      Research Roadmap
-```
+The system takes a research question, retrieves related scientific papers from OpenAlex, and generates hypotheses using an LLM.
 
-The current prototype uses Qwen locally through Ollama for agent reasoning and OpenAlex for literature retrieval.
+The multi-agent workflow includes:
 
-### Agents
+1. **Generation:** Creates hypotheses using the research question and retrieved papers.
+2. **Reflection:** Reviews hypotheses for weaknesses, evidence, and testability.
+3. **Proximity:** Measures similarity between hypotheses.
+4. **Ranking:** Compares hypotheses using an Elo-based tournament.
+5. **Evolution:** Refines or combines promising hypotheses.
+6. **Meta-review:** Summarizes the final hypotheses into a research roadmap.
 
-| Agent       | Role                                                                               |
-| ----------- | ---------------------------------------------------------------------------------- |
-| Generation  | Generates candidate hypotheses from the research goal and retrieved literature     |
-| Reflection  | Reviews hypotheses for plausibility, novelty, testability, evidence, and reasoning |
-| Ranking     | Compares hypotheses pairwise and updates their Elo ratings                         |
-| Evolution   | Refines and combines highly ranked hypotheses                                      |
-| Proximity   | Measures conceptual similarity between hypotheses                                  |
-| Meta-Review | Synthesizes the final hypotheses and reviews into a research roadmap               |
-| Supervisor  | Maintains shared state and coordinates the reasoning loop                          |
+A Supervisor coordinates the workflow and maintains shared state.
 
-## Experiment
+The system supports local Qwen models through Ollama and OpenAI models through the API. Structured outputs are validated using Pydantic.
 
-I wanted to test whether the multi-agent pipeline actually improved hypothesis quality rather than assuming that additional agents would help.
+## Experiments
 
-The comparison used the same research goal and retrieved literature for both conditions.
+I compared the single-agent baseline with the multi-agent system using three research questions about LLM reliability and scientific hypothesis generation.
 
-```text
-                 Shared Research Goal
-                         +
-                 Shared Literature
-                         |
-              +----------+----------+
-              |                     |
-              v                     v
-        Single Agent           Multi-Agent
-              |                     |
-        Generate Once        Generate
-              |               Reflect
-              |               Rank
-              |               Evolve
-              |               Repeat
-              |                     |
-              +----------+----------+
-                         |
-                         v
-                      Evaluator
-```
+Both systems used the same underlying model and retrieved literature. Each question was tested three times, with two hypotheses generated per system in each trial.
 
-The first complete run produced:
+Hypotheses were evaluated on scientific grounding, testability, feasibility, and reasoning using a fixed 1–5 rubric. Architecture labels were hidden during evaluation.
 
-| System                | Average Evaluator Score |
-| --------------------- | ----------------------: |
-| Single-agent baseline |               4.00 / 10 |
-| Multi-agent system    |               3.00 / 10 |
-| Difference            |                   -1.00 |
+### Results
 
-The multi-agent system performed worse in this run.
+| Metric | Single Agent | Multi-Agent |
+|---|---:|---:|
+| Average quality score | 4.056 / 5 | 3.875 / 5 |
+| Average model calls | 1 | 9 |
+| Average input tokens | 1,723 | 9,766 |
+| Average output tokens | 943 | 5,886 |
+| Average runtime | 11.08s | 75.36s |
 
-This is only one experiment with one research goal and a small local model, so the result is not enough to make a general claim about multi-agent systems. It did expose several problems worth investigating.
+The single-agent baseline scored slightly higher overall while using considerably less computation. The multi-agent system scored slightly higher on reasoning, but lower on grounding, testability, and feasibility.
 
-### What went wrong?
-
-Hypothesis convergence
-The evolved hypotheses became conceptually similar. Selecting and repeatedly refining the strongest candidates may have reduced exploration too quickly.
-
-Passive proximity analysis
-The system detects similarity between hypotheses, but the Supervisor does not currently use that information to change selection, remove duplicates, or encourage exploration.
-
-Shared-model bias
-The same underlying model generates, critiques, ranks, evolves, and evaluates hypotheses. The different agents have different roles, but they can still share the same underlying weaknesses.
-
-Error amplification
-Additional reasoning stages create opportunities to correct mistakes, but they also create opportunities to propagate them.
-
-Model capability
-The experiment uses a small local Qwen model. Scientific synthesis, novelty assessment, peer review, and experimental design may require a substantially stronger underlying model.
-
-The experiment also leaves an important comparison unresolved: whether improvements from multi-agent systems come from the architecture itself or simply from using more test-time compute than a direct single-agent call.
-
-The complete first experiment is saved in [`results/`](results/).
+These results are limited to a small benchmark evaluated by an LLM. The comparison also does not use equal token budgets, so the results should not be treated as a general conclusion about multi-agent systems.
 
 ## Running Locally
 
-Requirements:
-
-* Python 3.11+
-* Ollama
+Requires Python, Ollama for local inference, or an OpenAI API key for hosted inference.
 
 ```bash
 python3 -m venv .venv
@@ -129,30 +53,40 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Pull the model configured in `core/llm.py` and start Ollama:
+Configure the model provider in a `.env` file:
 
-```bash
-ollama pull qwen3:1.7b
-ollama serve
+```text
+MODEL_PROVIDER=openai
+OPENAI_MODEL=gpt-6-luna
+OPENAI_API_KEY=your_api_key
 ```
 
-Run the experiment:
+For local inference, set `MODEL_PROVIDER=ollama` and configure `OLLAMA_MODEL`.
+
+Prepare the benchmark literature:
 
 ```bash
-python3 main.py
+python3 -m experiments.prepare_benchmark
 ```
 
-Experiment outputs are saved as JSON files under `results/`.
+Run the benchmark:
 
-## Next Steps
+```bash
+python3 -m experiments.run_benchmark
+```
 
-* Use proximity scores during selection to preserve hypothesis diversity
-* Compare single-agent and multi-agent systems under equal inference budgets
-* Test stronger local and hosted models
-* Separate generation and evaluation across different models
-* Run the comparison across multiple research goals and repeated trials
-* Evaluate hypotheses using stronger external or human evaluation
+Analyze saved results:
 
-## Reference
+```bash
+python3 -m experiments.analyze_benchmark
+```
 
-The architecture is inspired by Google's publicly described AI Co-Scientist system. This project is an independent implementation built to explore the architecture and its failure modes.
+Experiment outputs are saved under `results/benchmark/`.
+
+## Limitations
+
+- The benchmark contains only three research questions.
+- The evaluator uses the same underlying model as the generation systems.
+- The multi-agent system uses more model calls and tokens than the baseline.
+- Retrieved literature does not guarantee that generated claims are supported.
+- Proximity scores are recorded but are not yet used to remove similar hypotheses.
