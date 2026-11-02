@@ -1,0 +1,140 @@
+{
+  "question_id": "Q2",
+  "trial": 2,
+  "model_provider": "openai",
+  "records": [
+    {
+      "architecture": "baseline",
+      "hypothesis": {
+        "id": "B2",
+        "title": "Explicit counterevidence verification improves calibration of hypothesis confidence",
+        "description": "An evidence-verification workflow that actively searches for and assesses evidence contrary to a candidate hypothesis will improve the calibration of LLM-assigned confidence in scientific hypotheses compared with checking only supporting evidence.",
+        "reasoning": "A system that verifies only supporting claims may selectively reinforce an initially generated idea. Requiring a counterevidence pass could reveal boundary conditions, conflicting findings, or missing support, prompting better-calibrated confidence and more appropriately qualified predictions. The retrieved work on evidence-informed beliefs motivates incorporating prior evidence into evaluation, but does not test counterevidence search during hypothesis generation.",
+        "supporting_evidence": [
+          "The retrieved abstract for \u201cEvidence-Informed LLM Beliefs for Continual Scientific Discovery\u201d describes updating beliefs using evidence from prior hypotheses and reports that accounting for evolving beliefs changes which hypotheses are considered surprising.",
+          "The retrieved abstract for \u201cScientific Knowledge-driven Decoding Constraints Improving the Reliability of LLMs\u201d supports the broader plausibility that structured knowledge constraints can affect scientific-task performance."
+        ],
+        "contradictory_evidence": [
+          "No retrieved abstract directly tests whether searching for counterevidence improves confidence calibration in generated scientific hypotheses.",
+          "Counterevidence retrieval could be incomplete or irrelevant, and may reduce confidence even when the candidate hypothesis is well supported."
+        ],
+        "testable_prediction": "Across a benchmark of literature packets containing both supporting and conflicting findings, an LLM workflow required to retrieve and summarize counterevidence before assigning confidence will show lower calibration error between stated confidence and blinded expert judgments of evidential support than a workflow that verifies supporting evidence only; assess hypothesis quality and confidence calibration separately.",
+        "elo_rating": 1000.0,
+        "generation": 0
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_1",
+        "grounding": 2,
+        "testability": 4,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "The literature motivates evidence-informed belief updating, but does not examine counterevidence searches or confidence calibration. The proposed comparison and calibration outcome are reasonably clear, though expert judgments of evidential support may not provide a straightforward calibration target."
+      },
+      "overall": 3.5
+    },
+    {
+      "architecture": "baseline",
+      "hypothesis": {
+        "id": "B1",
+        "title": "Claim-level evidence verification reduces unsupported claims in generated hypotheses",
+        "description": "Requiring an LLM to verify each factual premise in a proposed scientific hypothesis against retrieved source passages before finalizing the hypothesis will improve its evidential reliability compared with generation from the same literature without verification.",
+        "reasoning": "A hypothesis can be plausible yet rest on misrepresented or unsupported literature. Claim-level checking makes the connection between source evidence and the proposed mechanism explicit, potentially allowing the model to revise or qualify claims that the sources do not support. Retrieved work reports reliability gains from knowledge constraints in scientific tasks and from test-guided repair in code generation, but does not directly establish this effect for scientific hypotheses.",
+        "supporting_evidence": [
+          "The retrieved abstract for \u201cScientific Knowledge-driven Decoding Constraints Improving the Reliability of LLMs\u201d reports improved accuracy on scientific tasks when generation is constrained by domain knowledge.",
+          "The retrieved abstract for \u201cEvaluating and Improving the Reliability of LLM-Generated Code Refactorings\u201d reports improved correctness from iterative repair guided by tests and analysis; this offers an analogy for using external checks to catch generation errors."
+        ],
+        "contradictory_evidence": [
+          "The retrieved literature does not directly compare evidence-verified and unverified scientific hypothesis generation, so transfer from constrained scientific tasks or code repair is uncertain.",
+          "Verification may fail when retrieved sources are incomplete, ambiguous, or incorrectly interpreted by the model."
+        ],
+        "testable_prediction": "In a preregistered, blinded comparison using identical literature packets and model settings, hypotheses produced with claim-level source verification will receive higher expert-rated evidence-to-claim support scores and contain fewer unsupported factual premises than hypotheses produced without verification; rate novelty separately to test whether any reliability gain comes at a cost to novelty.",
+        "elo_rating": 1000.0,
+        "generation": 0
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_2",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "Knowledge constraints and test-guided repair provide indirect support for verification improving reliability, but the literature does not test claim-level verification of scientific hypotheses. The matched-packet comparison and separate measures of support and unsupported premises are clearly specified; expert rating and annotation require substantial effort."
+      },
+      "overall": 4
+    },
+    {
+      "architecture": "multi_agent",
+      "hypothesis": {
+        "id": "E1_1",
+        "title": "Source-grounded claim verification reduces unsupported premises without necessarily improving hypothesis quality overall",
+        "description": "For LLM-generated scientific hypotheses produced from a fixed literature corpus, decomposing background claims into checkable propositions and requiring source-based support or explicit uncertainty labels will reduce the proportion of unsupported or contradicted premises compared with generation without this step.",
+        "reasoning": "Checking each premise against the same fixed corpus makes the intervention specific and separates evidence accuracy from broader judgments of hypothesis quality. Explicitly labeling claims that cannot be verified may prevent uncertain background assumptions from being presented as established facts. Measuring novelty and coherence separately is important because verification could make outputs more conservative without making them better hypotheses.",
+        "supporting_evidence": [
+          "The supplied summary of SciDC reports improved accuracy when generation is constrained by standardized domain knowledge.",
+          "The supplied summary of a code-refactoring study reports improved functional reliability after iterative repair using test feedback and project context; this is an analogy for feedback-based checking, not direct evidence about scientific hypothesis generation."
+        ],
+        "contradictory_evidence": [
+          "The supplied evidence does not directly establish that literature-based claim verification improves scientific hypotheses.",
+          "A fixed or incomplete corpus may cause valid claims to be mislabeled as unsupported, and verification may reduce novelty or favor well-documented topics."
+        ],
+        "testable_prediction": "Using the same model, prompt, and retrieved corpus, randomly assign generations to ordinary drafting or claim decomposition followed by source-based verification and uncertainty labeling. Blinded domain experts should find a lower fraction of unsupported or contradicted background premises in the verification condition, evaluated against a prespecified evidence corpus. Assess novelty and coherence as separate outcomes, and report false-negative verification judgments to detect corpus-coverage effects.",
+        "elo_rating": 1016.0,
+        "generation": 1
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_3",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 5,
+        "explanation": "Evidence-informed beliefs and constrained generation are relevant, though neither directly tests source-based premise verification. The fixed-corpus comparison, explicit outcomes, and treatment of novelty, coherence, and corpus coverage make the prediction especially well reasoned and testable."
+      },
+      "overall": 4.25
+    },
+    {
+      "architecture": "multi_agent",
+      "hypothesis": {
+        "id": "E1_2",
+        "title": "Explicit alternative-discriminating prediction checks improve the testability of generated hypotheses",
+        "description": "For LLM-generated scientific hypotheses, requiring a verifier to identify at least one plausible competing explanation and assess whether the proposed experiment would yield different predicted outcomes under the two explanations will improve prediction discrimination and experimental testability compared with a general request to check hypothesis quality.",
+        "reasoning": "A prediction can be plausible yet fail to distinguish the proposed mechanism from alternatives. Making a concrete alternative and contrasting expected outcomes part of verification turns testability into an assessable criterion, rather than relying on general ratings of clarity or plausibility. This intervention targets the inferential link between a hypothesis and its experiment; it does not assume that it will improve the factual accuracy of background claims.",
+        "supporting_evidence": [
+          "The supplied summary of the code-refactoring study describes improved reliability from checking outputs against task-specific criteria, motivating\u2014but not directly demonstrating\u2014the value of explicit criteria for evaluating generated hypotheses."
+        ],
+        "contradictory_evidence": [
+          "The supplied evidence does not directly test alternative-based verification for scientific hypotheses.",
+          "Expert judgments about whether predictions distinguish alternatives may vary, and a verifier could produce superficial alternatives or overly complex experiments."
+        ],
+        "testable_prediction": "Randomly assign generated hypotheses to either a general quality-review condition or a verifier condition requiring a named competing explanation, contrasting outcome predictions, and a feasible measurement that could distinguish them. Blinded domain experts should rate the latter condition higher on prediction discrimination and experimental testability using prespecified rubrics. Separately score factual premise accuracy, novelty, feasibility, and inter-rater agreement to determine whether any improvement is specific to testability.",
+        "elo_rating": 984.0,
+        "generation": 1
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_4",
+        "grounding": 2,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "The retrieved literature does not address competing explanations or discriminating experimental predictions, so grounding is limited. The intervention and comparison are clearly operationalized, with suitable separate outcomes, although expert scoring and judging feasibility would require careful rubric design."
+      },
+      "overall": 3.75
+    }
+  ],
+  "baseline_usage": {
+    "calls": 1,
+    "input_tokens": 2132,
+    "output_tokens": 885,
+    "elapsed_seconds": 10.66
+  },
+  "multi_agent_usage": {
+    "calls": 9,
+    "input_tokens": 10220,
+    "output_tokens": 5760,
+    "elapsed_seconds": 74.78
+  },
+  "evaluation_usage": {
+    "calls": 1,
+    "input_tokens": 2841,
+    "output_tokens": 663,
+    "elapsed_seconds": 7.21
+  }
+}

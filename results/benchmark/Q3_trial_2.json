@@ -1,0 +1,135 @@
+{
+  "question_id": "Q3",
+  "trial": 2,
+  "model_provider": "openai",
+  "records": [
+    {
+      "architecture": "baseline",
+      "hypothesis": {
+        "id": "B1",
+        "title": "Structured critique increases experimentally operationalized testability",
+        "description": "For a fixed model, scientific domain, and total inference budget, iterative critique that explicitly asks reviewers to identify measurable variables, controls, comparison conditions, and falsifiable outcomes will increase the experimentally operationalized testability of generated hypotheses relative to single-pass generation.",
+        "reasoning": "The HypoEvolve abstract describes agents that assess testability during iterative population updates, but does not isolate critique as a causal factor. This motivates a controlled test of whether critique specifically improves testability. The systematic re-evaluation of code-improvement methods also cautions that gains should be compared at matched compute budgets and measured with signals independent of the method\u2019s own optimization target.",
+        "supporting_evidence": [
+          "HypoEvolve reports an iterative multi-agent framework that includes assessment of hypothesis testability, but its abstract does not establish the independent effect of critique on testability.",
+          "The controlled code-quality re-evaluation reports that apparent gains can depend on the optimized signal and recommends budget-matched comparisons and independent outcome measures."
+        ],
+        "contradictory_evidence": [
+          "The retrieved literature does not directly report a controlled comparison of iterative critique versus single-pass generation using an independent measure of scientific-hypothesis testability.",
+          "Iterative processes may improve other idea qualities without necessarily improving testability; the Nova abstract emphasizes novelty and diversity rather than experimental operationalization."
+        ],
+        "testable_prediction": "Randomly assign equivalent prompts and model calls to (a) single-pass generation or (b) generation followed by structured critique and revision, holding total token or call budget constant. Blind domain experts to condition and score hypotheses using a preregistered rubric for measurable variables, controls, feasible procedures, and falsifiable outcomes. The critique condition will have a higher mean rubric score, including on a held-out testability measure not shown to the critique agent.",
+        "elo_rating": 1000.0,
+        "generation": 0
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_1",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "HypoEvolve explicitly includes testability assessment in iterative hypothesis updates, but the literature does not isolate structured critique or establish that it improves testability. The matched-budget comparison and blinded rubric make the proposed test clear and practical."
+      },
+      "overall": 4
+    },
+    {
+      "architecture": "multi_agent",
+      "hypothesis": {
+        "id": "E1_2",
+        "title": "The testability benefit of domain-specific critique is greatest for methodologically complex hypotheses",
+        "description": "Domain-specific experimentalist critique will improve the feasibility and discriminative validity of revised hypotheses more strongly when testing them involves substantial method-specific constraints than when the required measurements and controls are relatively straightforward.",
+        "reasoning": "Generic critique can often prompt explicit variables and outcomes, but recognizing whether a measurement is valid, a control is adequate, or a method can resolve a proposed effect depends on specialized knowledge. This suggests that expertise should matter most where such choices constrain whether the experiment can answer the question. Stratifying hypotheses by independently assessed methodological complexity makes this boundary condition testable rather than assuming a uniform benefit.",
+        "supporting_evidence": [],
+        "contradictory_evidence": [
+          "The available evidence does not establish that methodological complexity moderates the effect of critique.",
+          "Complex hypotheses may be harder to rate reliably, and complexity could be confounded with topic familiarity or initial hypothesis quality."
+        ],
+        "testable_prediction": "Before critique, independent experts will rate a set of hypotheses for methodological complexity. Within complexity strata, assign each hypothesis to matched-budget generic critique or domain-specific experimentalist critique followed by revision. Blinded evaluators will score feasibility, adequacy of controls, and discrimination from alternatives. The domain-specific critique advantage will be larger in the high-complexity stratum, while differences in surface specificity will be smaller or less dependent on complexity.",
+        "elo_rating": 984.0,
+        "generation": 1
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_2",
+        "grounding": 2,
+        "testability": 4,
+        "feasibility": 3,
+        "reasoning": 4,
+        "explanation": "The claim that domain expertise matters more for methodologically complex hypotheses is plausible but not directly supported by the abstracts. Complexity stratification and outcome measures are specified, though defining reliable complexity strata and obtaining suitable expert evaluators may be challenging."
+      },
+      "overall": 3.25
+    },
+    {
+      "architecture": "baseline",
+      "hypothesis": {
+        "id": "B2",
+        "title": "Critique improves stated specificity more than independent experimental feasibility",
+        "description": "Iterative critique will increase the apparent specificity of LLM-generated hypotheses, but will not reliably improve their independently judged experimental feasibility when the critique process is evaluated against a compute-matched sampling baseline and a rubric that does not reward wording changes alone.",
+        "reasoning": "A critique agent may encourage explicit outcomes and measurements without ensuring that the proposed experiment is feasible, discriminating, or adequately controlled. The supplied code-quality review reports that some improvement techniques perform well on their own targeted signals but not consistently on independent dimensions, and that matched-budget baselines are important. This suggests a plausible limitation for critique-based hypothesis refinement that has not yet been directly tested in the retrieved literature.",
+        "supporting_evidence": [
+          "The systematic re-evaluation of code-improvement methods finds that gains can be confined to the quality dimension targeted by a technique and recommends evaluating independent measures at matched budgets.",
+          "HypoEvolve\u2019s abstract describes testability assessment within a broader iterative framework, leaving open whether critique raises experimentally useful testability rather than surface-level specificity."
+        ],
+        "contradictory_evidence": [
+          "HypoEvolve reports that its iterative framework outperforms baselines on external DepMap and Open Targets measures for its drug-repurposing task, suggesting that iterative collaboration can yield improvements that extend beyond self-assessment; however, the abstract does not isolate critique or measure general hypothesis testability.",
+          "Nova reports improvements in idea quality under an iterative planning-and-search approach, although its reported focus is novelty and diversity rather than experimental feasibility."
+        ],
+        "testable_prediction": "Compare critique-and-revision against single-pass generation and an equal-budget best-of-n selection baseline. Have blinded experts separately score linguistic specificity and experimental feasibility, with feasibility defined by whether the proposal identifies a practicable intervention, measurable outcome, suitable controls, and a design capable of distinguishing the hypothesis from alternatives. Critique will raise specificity scores relative to single-pass generation, but its feasibility advantage over the equal-budget sampling baseline will be absent or substantially smaller.",
+        "elo_rating": 1000.0,
+        "generation": 0
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_3",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "The code-quality review supports caution about gains on targeted measures and emphasizes compute-matched baselines, but applying that finding to scientific-hypothesis critique is an untested analogy. The predictions distinguish specificity from feasibility and are directly measurable."
+      },
+      "overall": 4
+    },
+    {
+      "architecture": "multi_agent",
+      "hypothesis": {
+        "id": "E1_1",
+        "title": "Domain-specific critique improves discriminative testability beyond added procedural detail",
+        "description": "Under matched revision budgets, iterative critique will improve the ability of LLM-generated hypotheses to distinguish the focal claim from plausible alternatives more when critique comes from a domain-specific experimentalist than when it is generic or self-generated. The advantage will be larger for discriminative validity than for surface-level operational detail.",
+        "reasoning": "Revision can clarify variables and measurements, but those changes alone do not ensure that a proposed experiment rules out competing explanations. Domain expertise may identify missing controls, unsuitable measurements, or confounds that generic critique overlooks. Separating ratings of operational detail from ratings of discrimination tests whether expertise adds substantive methodological value rather than merely prompting longer or more specific proposals.",
+        "supporting_evidence": [],
+        "contradictory_evidence": [
+          "The available description of HypoEvolve does not isolate reviewer expertise or directly establish that critique improves testability.",
+          "Expert reviewers may vary in their advice, and any benefit could reflect critique quality or additional information rather than domain expertise itself."
+        ],
+        "testable_prediction": "Randomly assign initial hypotheses to one-pass generation, matched-budget self-critique, generic external critique, or domain-specific experimentalist critique followed by revision. Blinded domain experts will rate outcomes separately for operational detail and for the ability of the proposed design to distinguish the hypothesis from specified alternatives. Domain-specific critique will produce a larger improvement over one-pass generation on discriminative validity than on operational detail, and a larger discriminative-validity gain than generic or self-critique.",
+        "elo_rating": 1016.0,
+        "generation": 1
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_4",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 3,
+        "reasoning": 4,
+        "explanation": "The literature supports evaluating iterative hypothesis refinement and its testability, but provides no direct evidence that domain-specific critique improves discriminative validity. The comparison and separate outcome ratings are clear; specifying plausible alternatives and recruiting expert critics and evaluators add practical demands."
+      },
+      "overall": 3.75
+    }
+  ],
+  "baseline_usage": {
+    "calls": 1,
+    "input_tokens": 1880,
+    "output_tokens": 1034,
+    "elapsed_seconds": 11.53
+  },
+  "multi_agent_usage": {
+    "calls": 9,
+    "input_tokens": 9797,
+    "output_tokens": 6532,
+    "elapsed_seconds": 81.51
+  },
+  "evaluation_usage": {
+    "calls": 1,
+    "input_tokens": 2674,
+    "output_tokens": 637,
+    "elapsed_seconds": 7.68
+  }
+}

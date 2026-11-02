@@ -1,0 +1,139 @@
+{
+  "question_id": "Q1",
+  "trial": 3,
+  "model_provider": "openai",
+  "records": [
+    {
+      "architecture": "baseline",
+      "hypothesis": {
+        "id": "B1",
+        "title": "Evidence-linked hypothesis generation with claim-level provenance reduces unsupported scientific claims",
+        "description": "Scientific hypothesis-generation systems that require each factual premise and supporting-evidence statement to be linked to retrieved source passages will produce fewer unsupported or fabricated claims than systems given the same literature without a claim-level provenance requirement.",
+        "reasoning": "The supplied literature identifies unfounded fabrication and factual errors as distinct forms of distorted AI output, and the hallucination survey describes detection and mitigation as active research areas. Requiring claim-level provenance could make unsupported premises more visible during generation and encourage the model to distinguish source-backed evidence from speculation. This is a plausible intervention, but the supplied sources do not directly test it in scientific hypothesis generation.",
+        "supporting_evidence": [
+          "The 2024 classification study identifies \u201cUnfounded fabrication\u201d and \u201cFactual errors\u201d among its first-level error types.",
+          "The 2025 survey reviews hallucination detection and mitigation approaches and highlights challenges posed by LLMs."
+        ],
+        "contradictory_evidence": [
+          "The retrieved literature does not report a controlled evaluation of claim-level provenance for scientific hypothesis generation.",
+          "A source link may be present yet fail to support the associated claim, so provenance alone may not prevent reasoning errors."
+        ],
+        "testable_prediction": "In a randomized evaluation using identical literature packets and models, the provenance-required condition will have a lower rate of independently adjudicated unsupported factual premises and fabricated evidence claims per generated hypothesis than a condition without claim-level provenance, while maintaining comparable hypothesis specificity.",
+        "elo_rating": 1000.0,
+        "generation": 0
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_1",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "The literature documents fabrication and factual errors and identifies mitigation as an active research area, but does not test claim-level provenance. The randomized comparison and proposed outcome measures are clear and practical; the predicted effect is plausible but remains unverified."
+      },
+      "overall": 4
+    },
+    {
+      "architecture": "multi_agent",
+      "hypothesis": {
+        "id": "E1_2",
+        "title": "Targeted review with calibrated abstention improves selective error control",
+        "description": "A hypothesis-generation system that applies separate factual-grounding, reasoning, logic, and mathematical-consistency checks, then abstains from retaining a claim when the relevant check is inconclusive, will reduce retained reasoning and logic errors more effectively than a single general-purpose review. The benefit should be evaluated alongside coverage, since abstention can lower errors simply by withholding more hypotheses.",
+        "reasoning": "The supplied classification study treats logic, reasoning, mathematical, factual, and fabrication errors as distinct categories, suggesting that review targeted to specific error types may be more diagnostic than an undifferentiated critique. Adding an explicit abstention option could prevent uncertain claims from being retained, but may also reduce the number or novelty of hypotheses. Measuring error rates at matched coverage, as well as overall coverage, helps distinguish improved checking from simply withholding more output.",
+        "supporting_evidence": [
+          "The supplied 2024 classification study distinguishes logic, reasoning, mathematical, and factual errors, as well as unfounded fabrication."
+        ],
+        "contradictory_evidence": [
+          "The supplied evidence does not show that specialized review or abstention reduces these errors.",
+          "Review steps may share the generator's blind spots, and abstention may reduce coverage or novelty without improving error detection."
+        ],
+        "testable_prediction": "On a benchmark of scientific prompts with expert-adjudicated error labels, compare a single-review baseline with separate error-type checks and an abstention option. Measure retained reasoning and logic errors, factual errors, abstention rate, coverage, and novelty; additionally compare error rates at matched coverage. The targeted-review system is predicted to have fewer retained reasoning and logic errors at matched coverage, with any coverage or novelty cost reported explicitly.",
+        "elo_rating": 984.0,
+        "generation": 1
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_2",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "The classification study distinguishes error types, which supports the rationale for targeted checks, but does not show that such checks or abstention improve outcomes. The benchmark, error measures, and matched-coverage comparison make the hypothesis well specified; expert labeling and coverage matching require meaningful but feasible effort."
+      },
+      "overall": 4
+    },
+    {
+      "architecture": "baseline",
+      "hypothesis": {
+        "id": "B2",
+        "title": "Explicit separation of evidence, inference, and speculation reduces hallucinated support in scientific hypotheses",
+        "description": "Prompting AI systems to label statements in each hypothesis as directly supported by retrieved literature, inferred from that evidence, or speculative will reduce the rate at which speculative claims are presented as established findings.",
+        "reasoning": "The literature describes multiple types of distorted output, including reasoning errors and unfounded fabrication, suggesting that errors can arise both from inaccurate facts and from how claims are framed. Explicit epistemic labels may make the boundary between source evidence and novel conjecture clearer to both the generator and evaluators. This is a testable design proposal rather than an effect demonstrated by the supplied sources.",
+        "supporting_evidence": [
+          "The 2024 classification study distinguishes reasoning errors from unfounded fabrication and factual errors.",
+          "The 2025 survey discusses taxonomies of hallucination phenomena and mitigation approaches."
+        ],
+        "contradictory_evidence": [
+          "The retrieved literature does not directly evaluate epistemic labeling during scientific hypothesis generation.",
+          "Labels may not improve factual accuracy if the model assigns them incorrectly or if evaluators interpret them inconsistently."
+        ],
+        "testable_prediction": "Compared with an otherwise identical generation condition without epistemic labels, the labeled condition will yield fewer claims judged by blinded reviewers to present speculation as established evidence, without reducing the number of testable predictions per hypothesis.",
+        "elo_rating": 1000.0,
+        "generation": 0
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_3",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "The literature identifies reasoning errors and fabrication but provides no evidence that epistemic labels reduce them. The comparison and blinded-review outcome are testable, and the proposed mechanism is reasonable, though the predicted effect is not established."
+      },
+      "overall": 4
+    },
+    {
+      "architecture": "multi_agent",
+      "hypothesis": {
+        "id": "E1_1",
+        "title": "Evidence entailment checks reduce unsupported premises without suppressing testable novelty",
+        "description": "Requiring each factual premise in a generated scientific hypothesis to be linked to a verifiable passage and checked for whether that passage actually supports the premise will reduce unsupported factual claims more than requiring citations alone. Claims not supported by the retrieved text should be qualified or omitted, while novel inferences should be labeled as inferences rather than presented as established facts.",
+        "reasoning": "A citation can be present without substantiating the associated claim, so provenance alone may not prevent misattribution or overstatement. Checking the support relationship directly targets factual errors and unfounded fabrication, while distinguishing evidence from inference may preserve the ability to propose novel ideas. This mitigation remains a testable proposal rather than an established result.",
+        "supporting_evidence": [
+          "The supplied 2024 classification study distinguishes factual errors and unfounded fabrication as error types in AI-generated content."
+        ],
+        "contradictory_evidence": [
+          "The supplied evidence does not establish that claim-to-passage entailment checks reduce errors.",
+          "Judging whether a passage supports a claim may itself be unreliable, and stricter support requirements could remove useful but genuinely novel hypotheses."
+        ],
+        "testable_prediction": "In a preregistered study using the same model, prompts, and literature corpus, compare citation-only grounding with passage-linked grounding that also checks claim support and labels unsupported inference. Blinded experts will rate factual errors, fabricated literature details, and unsupported premises; novelty and the proportion of hypotheses retained will be reported separately. The entailment-check condition is predicted to reduce unsupported premises and fabricated details without a corresponding loss in expert-rated novelty.",
+        "elo_rating": 1016.0,
+        "generation": 1
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_4",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "The literature supports the relevance of factual errors and fabrication but does not directly evaluate entailment checks or their effect on novelty. The citation-only comparison and separate measures for errors, novelty, and retention are clear; implementing and assessing support checks is feasible."
+      },
+      "overall": 4
+    }
+  ],
+  "baseline_usage": {
+    "calls": 1,
+    "input_tokens": 1157,
+    "output_tokens": 702,
+    "elapsed_seconds": 10.73
+  },
+  "multi_agent_usage": {
+    "calls": 9,
+    "input_tokens": 9315,
+    "output_tokens": 5535,
+    "elapsed_seconds": 74.8
+  },
+  "evaluation_usage": {
+    "calls": 1,
+    "input_tokens": 1889,
+    "output_tokens": 607,
+    "elapsed_seconds": 7.55
+  }
+}

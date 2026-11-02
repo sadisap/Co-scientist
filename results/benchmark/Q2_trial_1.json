@@ -1,0 +1,140 @@
+{
+  "question_id": "Q2",
+  "trial": 1,
+  "model_provider": "openai",
+  "records": [
+    {
+      "architecture": "baseline",
+      "hypothesis": {
+        "id": "B2",
+        "title": "Explicit counterevidence searches improve the robustness of LLM-generated hypotheses",
+        "description": "A hypothesis-generation workflow that searches for and evaluates evidence that could contradict each candidate hypothesis will produce hypotheses with more appropriately bounded claims and more discriminating testable predictions than a workflow that verifies only supporting evidence.",
+        "reasoning": "Checking only whether sources support a proposed idea risks selecting confirmatory evidence and overlooking relevant conflicting findings. The supplied literature on evidence-informed beliefs emphasizes updating from prior evidence and avoiding redundant or spurious signals, while the attribution study highlights that different sections of scientific abstracts contribute differently to generated hypotheses. These results motivate testing a verification protocol that deliberately examines both support and contradiction, although they do not directly demonstrate its effect on hypothesis quality.",
+        "supporting_evidence": [
+          "The abstract for \u201cEvidence-Informed LLM Beliefs for Continual Scientific Discovery\u201d reports that incorporating evidence from prior hypotheses changes which ideas remain surprising and helps avoid spurious rewards and redundancy; this motivates accounting for the broader evidence history.",
+          "The supplied literature includes no direct comparison of support-only and counterevidence-seeking verification for scientific hypothesis generation."
+        ],
+        "contradictory_evidence": [
+          "Counterevidence retrieval may be incomplete or may retrieve superficially related studies, so it could introduce noise rather than improve robustness.",
+          "The supplied literature does not show that counterevidence searches yield better scientific predictions or expert judgments."
+        ],
+        "testable_prediction": "For a fixed set of research prompts and retrieved literature, compare LLM outputs produced with support-only verification against outputs produced with an additional explicit search for contradictory evidence. Independent domain experts should rate the latter condition higher for appropriate qualification and for predictions that distinguish the hypothesis from plausible alternatives; factual error rates and novelty should also be measured.",
+        "elo_rating": 1000.0,
+        "generation": 0
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_1",
+        "grounding": 3,
+        "testability": 4,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "The literature supports using evidence to guide LLM outputs, but does not directly test counterevidence searches or hypothesis quality. The support-only versus counterevidence comparison and expert-rated outcomes are reasonably clear and practical."
+      },
+      "overall": 3.75
+    },
+    {
+      "architecture": "baseline",
+      "hypothesis": {
+        "id": "B1",
+        "title": "Claim-level evidence verification improves the factual grounding of generated hypotheses",
+        "description": "When an LLM checks the empirical premises of each proposed scientific hypothesis against retrieved source passages and revises unsupported premises before output, its hypotheses will contain fewer factual errors and unsupported claims than hypotheses generated from the same literature without this verification step.",
+        "reasoning": "A hypothesis can be novel yet unreliable if it rests on misread or invented findings. The supplied literature reports that knowledge constraints can improve accuracy on scientific tasks and that test-guided feedback can repair failures in code generation, though neither directly tests verification of scientific hypotheses. This supports testing whether explicit source-grounded checks transfer to hypothesis generation.",
+        "supporting_evidence": [
+          "The abstract for \u201cScientific Knowledge-driven Decoding Constraints Improving the Reliability of LLMs\u201d reports improved accuracy when generation is constrained by domain knowledge; this is related evidence for using explicit evidence constraints, not a direct test of hypothesis verification.",
+          "The abstract for \u201cEvaluating and Improving the Reliability of LLM-Generated Code Refactorings\u201d reports that iterative feedback and repair can improve correctness in code refactoring, providing an analogy for verification-and-revision workflows."
+        ],
+        "contradictory_evidence": [
+          "The supplied literature does not directly establish that evidence verification improves the factual reliability of LLM-generated scientific hypotheses.",
+          "Verification and revision could remove plausible but insufficiently documented ideas, potentially reducing hypothesis diversity or novelty."
+        ],
+        "testable_prediction": "On a benchmark of research questions paired with source literature, randomly assign identical model prompts to generation with or without claim-level source verification and revision. Blind expert ratings should find a lower rate of unsupported or contradicted factual premises in the verification condition, while separately measuring novelty to detect any trade-off.",
+        "elo_rating": 1000.0,
+        "generation": 0
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_2",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "Scientific knowledge constraints improving task accuracy and evidence-informed belief updating offer indirect support, but neither establishes claim-level verification effects on hypotheses. The comparison, outcome measures, and novelty check are clearly specified."
+      },
+      "overall": 4
+    },
+    {
+      "architecture": "multi_agent",
+      "hypothesis": {
+        "id": "E1_2",
+        "title": "Conflict-sensitive evidence review improves confidence calibration and qualification",
+        "description": "When retrieved literature contains meaningful disagreement, LLM-generated hypotheses will be better calibrated if the system explicitly weighs the strength and relevance of supporting and contradictory findings and adjusts its confidence and wording accordingly, rather than treating evidence retrieval as a binary support check.",
+        "reasoning": "A hypothesis can avoid outright factual errors yet still overstate certainty when evidence is mixed. Explicitly representing disagreement and its relevance should help distinguish robust premises from contested ones, leading to appropriately qualified claims and confidence. This is narrower than general fact-checking: its proposed benefit is most apparent when evidence conflicts, and it should not require hedging when evidence is consistent.",
+        "supporting_evidence": [
+          "The supplied description of Evidence-Informed LLM Beliefs reports that retrieving prior discoveries helps anticipate later belief updates and that evolving evidence changes which hypotheses remain surprising."
+        ],
+        "contradictory_evidence": [
+          "The supplied evidence concerns belief updating rather than calibration of scientific hypotheses, so the connection remains an extrapolation.",
+          "Models may misjudge source quality or the significance of disagreement, and additional qualification could reduce clarity without improving calibration."
+        ],
+        "testable_prediction": "In a preregistered evaluation with matched literature sets that either contain conflicting findings or are largely consistent, compare generation with explicit conflict-sensitive evidence review against ordinary evidence checking. In the conflicting-literature subset, blinded experts will rate the conflict-sensitive condition as better calibrated and more appropriately qualified; in the consistent subset, it will not produce a substantial increase in unnecessary hedging.",
+        "elo_rating": 984.0,
+        "generation": 1
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_3",
+        "grounding": 3,
+        "testability": 4,
+        "feasibility": 3,
+        "reasoning": 5,
+        "explanation": "Evidence-informed belief updating is relevant, though the literature does not address handling conflicting findings or confidence calibration directly. The conflict-versus-consistency comparison is logical, but defining disagreement and reliably rating calibration may require substantial operational detail."
+      },
+      "overall": 3.75
+    },
+    {
+      "architecture": "multi_agent",
+      "hypothesis": {
+        "id": "E1_1",
+        "title": "Claim-decomposed verification with counterevidence search reduces factual errors in generated hypotheses",
+        "description": "Before presenting an LLM-generated scientific hypothesis, decompose its factual premises into checkable claims, retrieve source passages that support and challenge each claim, and revise or qualify claims that are unsupported, misrepresented, or contradicted. This process will improve factual reliability relative to generation without verification.",
+        "reasoning": "Checking claims individually makes it easier to detect errors hidden by a broadly plausible narrative, while searching for counterevidence addresses the risk that support-only checking reinforces confirmation bias. Combining these steps should prompt targeted revisions rather than relying on a general request to make the hypothesis more accurate. The benefit is an empirical question: verification may consume time or lead to excessive caution.",
+        "supporting_evidence": [
+          "The supplied description of SciDC reports improved accuracy when generation is constrained by scientific knowledge, though it does not directly test claim-level verification.",
+          "The supplied description of Evidence-Informed LLM Beliefs reports that retrieving prior discoveries can inform belief updates, though it does not establish effects on scientific-hypothesis accuracy."
+        ],
+        "contradictory_evidence": [
+          "The cited related work does not directly establish that claim decomposition, counterevidence retrieval, and revision improve the factual accuracy of generated scientific hypotheses.",
+          "Retrieved sources may be incomplete or poorly matched to a claim, and aggressive revision could remove accurate but novel ideas."
+        ],
+        "testable_prediction": "Randomly assign otherwise identical hypothesis-generation runs to no verification, support-only claim checks, or claim-level checks that retrieve both supporting and contradictory passages. Blinded domain experts will judge a higher proportion of factual premises as correct and directly supported in the balanced-check condition than in either comparison condition. Assess novelty and testability separately to identify trade-offs.",
+        "elo_rating": 1016.0,
+        "generation": 1
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_4",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "The literature offers indirect support for evidence-guided constraints and iterative correction, but not for claim decomposition or counterevidence search in hypothesis generation. The three-arm comparison and separate reliability, novelty, and testability assessments make the prediction well specified."
+      },
+      "overall": 4
+    }
+  ],
+  "baseline_usage": {
+    "calls": 1,
+    "input_tokens": 2132,
+    "output_tokens": 939,
+    "elapsed_seconds": 11.05
+  },
+  "multi_agent_usage": {
+    "calls": 9,
+    "input_tokens": 10165,
+    "output_tokens": 5961,
+    "elapsed_seconds": 73.35
+  },
+  "evaluation_usage": {
+    "calls": 1,
+    "input_tokens": 2840,
+    "output_tokens": 656,
+    "elapsed_seconds": 7.65
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "question_id": "Q3",
+  "trial": 1,
+  "model_provider": "openai",
+  "records": [
+    {
+      "architecture": "multi_agent",
+      "hypothesis": {
+        "id": "E1_2",
+        "title": "Design-focused critique improves the practical discriminating value of proposed experiments",
+        "description": "Compared with equally budgeted generic critique, critique that explicitly requires feasible procedures and outcomes distinguishing a hypothesis from plausible alternatives will increase the proportion of revised hypotheses whose proposed experiments can be implemented and whose outcomes discriminate among competing explanations.",
+        "reasoning": "A hypothesis can appear testable because it names measurable variables yet still lack a workable procedure, appropriate comparison, or result that separates it from alternatives. Combining the emphasis on design elements with the emphasis on falsifiable outcomes therefore shifts evaluation from the presence of testability language to the quality of the proposed test. Assessing both expert judgments and protocol-level criteria makes the claim more consequential and less dependent on polished wording.",
+        "supporting_evidence": [
+          "The supplied summaries motivate evaluating scientific outputs on independent measures and distinguish testability assessment from general idea quality, but provide no direct result on experimental implementation or discrimination."
+        ],
+        "contradictory_evidence": [
+          "The proposed advantage is unconfirmed by the supplied evidence.",
+          "Feasibility and discriminating power depend on domain expertise and available resources, so effects may vary substantially across scientific fields."
+        ],
+        "testable_prediction": "For matched initial hypotheses and inference budgets, compare generic critique with critique requiring an executable procedure, operational measures, controls, and predicted outcomes under both the focal claim and at least one plausible alternative. Blinded domain experts will rate the design-focused group higher on feasibility and discriminating power, and a greater fraction will pass preregistered checklist criteria for implementable procedures and distinguishable predicted outcomes; ratings will be compared separately from prose-quality scores.",
+        "elo_rating": 984.0,
+        "generation": 1
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_1",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "The literature supports evaluating hypothesis testability but does not show that design-focused critique improves it. The matched comparison, blinded expert ratings, and protocol-level criteria make the prediction concrete; implementation and alternative-discrimination criteria may require domain-specific judgment."
+      },
+      "overall": 4
+    },
+    {
+      "architecture": "baseline",
+      "hypothesis": {
+        "id": "B1",
+        "title": "Iterative critique increases the operational testability of generated hypotheses",
+        "description": "Repeated critique and revision will increase the extent to which LLM-generated hypotheses specify measurable variables, comparison conditions, and falsifiable outcomes, compared with generating a hypothesis once.",
+        "reasoning": "Critique can expose missing links between a scientific claim and an experiment, prompting revisions that make the claim operational. The retrieved HypoEvolve abstract describes systems that assess testability during iterative population updates, but does not isolate whether critique itself improves testability. Thus, the predicted effect remains to be tested.",
+        "supporting_evidence": [
+          "The HypoEvolve abstract describes iterative hypothesis assessment that explicitly includes testability, while noting that the effects of different forms of agent collaboration remain an open question.",
+          "The retrieved Nova abstract reports improvements from iterative planning and search in idea quality, but does not report testability as an outcome."
+        ],
+        "contradictory_evidence": [
+          "The retrieved controlled review of LLM-generated code reports that self-refinement and reviewer-agent techniques did not consistently outperform matched-budget alternatives on independent quality measures, cautioning that iterative feedback may not yield general improvements."
+        ],
+        "testable_prediction": "Randomly assign LLM-generated hypotheses to either one-pass generation or three rounds of critique and revision, with total token or model-call budgets matched using a non-critique control. Blinded domain experts will score the final hypotheses on a preregistered rubric covering measurable variables, controls or comparators, and falsifiable outcomes. The critique arm will have a higher mean testability score than the matched-budget control.",
+        "elo_rating": 1000.0,
+        "generation": 0
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_2",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "HypoEvolve describes iterative hypothesis updates that assess testability, but does not establish that critique causes improvement. The one-pass and matched-budget comparison with a defined testability rubric is clear, though constructing a fair non-critique control may take care."
+      },
+      "overall": 4
+    },
+    {
+      "architecture": "multi_agent",
+      "hypothesis": {
+        "id": "E1_1",
+        "title": "Design-specific critique improves testability beyond the effect of revision rounds",
+        "description": "When model and inference budget are held constant, critique that requires operational variables, controls, feasible measurements, and discriminating outcomes will improve hypothesis testability more than generic critique; the effect will be largest for initially underspecified hypotheses.",
+        "reasoning": "The two source hypotheses identify both targeted critique and iterative revision as plausible contributors to testability, but a simple comparison with one-shot generation cannot distinguish the effect of critique content from the effect of additional revision. A factorial comparison can isolate these contributions while testing whether design-focused critique is especially useful when initial hypotheses lack operational detail. Blinded scoring and matched budgets reduce the risk that polish or extra computation explains the result.",
+        "supporting_evidence": [
+          "The supplied HypoEvolve summary describes testability assessment in a scientific-agent workflow, but does not establish that critique improves testability.",
+          "The supplied code-quality review cautions that methods should be evaluated with independent measures and matched budgets."
+        ],
+        "contradictory_evidence": [
+          "Neither supplied source directly compares design-specific with generic critique or reports a causal effect on testability.",
+          "Expert ratings may favor conventional experimental formats and may not capture whether a proposed test is practically executable."
+        ],
+        "testable_prediction": "Randomly assign initial hypotheses, stratified by baseline underspecification, to a 2\u00d72 design: generic versus design-specific critique, with versus without a revision round. Match total inference budgets across conditions. Blinded evaluators using a preregistered rubric will find a larger improvement in operational testability for design-specific than generic critique, with the difference largest among initially underspecified hypotheses; the factorial analysis will estimate whether an additional revision round has an independent effect.",
+        "elo_rating": 1016.0,
+        "generation": 1
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_3",
+        "grounding": 3,
+        "testability": 4,
+        "feasibility": 3,
+        "reasoning": 5,
+        "explanation": "The literature motivates assessing testability but provides no direct evidence for the proposed effect. The factorial design can separate critique content from revision rounds and test the underspecification interaction; matching budgets across conditions and defining the factors cleanly are substantial design demands."
+      },
+      "overall": 3.75
+    },
+    {
+      "architecture": "baseline",
+      "hypothesis": {
+        "id": "B2",
+        "title": "Testability-focused critique outperforms generic critique",
+        "description": "Iterative critique that explicitly asks reviewers to identify missing measurements, controls, and falsifiable predictions will produce hypotheses with greater experimental testability than an equal number of rounds of generic scientific critique.",
+        "reasoning": "Generic critique may improve clarity or plausibility without making a hypothesis easier to test. Directing each critique toward experimental operationalization should more reliably elicit concrete outcomes and comparison conditions. This is a plausible, unverified distinction: the retrieved literature describes assessment of testability in collaborative systems but does not establish which critique prompts improve it.",
+        "supporting_evidence": [
+          "The HypoEvolve abstract identifies assessment of testability as part of its collaborative workflow, but presents the comparative effects of collaboration mechanisms as an open question.",
+          "The retrieved code-quality review warns that techniques should be evaluated on measures independent of the feedback signal they optimize, motivating blinded, rubric-based assessment rather than relying on the critique system's own scores."
+        ],
+        "contradictory_evidence": [
+          "The retrieved literature provides no direct comparison of testability-focused versus generic critique for scientific hypotheses."
+        ],
+        "testable_prediction": "Give matched sets of initial hypotheses either three rounds of generic scientific critique or three rounds of critique explicitly requiring a measurement plan, comparator, and falsifiable outcome. Have independent experts, blinded to condition, score testability and assess whether each proposed prediction could be evaluated with the specified design. The testability-focused arm will score higher on both outcomes.",
+        "elo_rating": 1000.0,
+        "generation": 0
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_4",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 5,
+        "reasoning": 4,
+        "explanation": "The literature supports testability as an evaluation target, not the claim that targeted critique outperforms generic critique. The equal-round comparison, blinded expert scoring, and specified experimental-design elements make this a straightforward and practical test."
+      },
+      "overall": 4.25
+    }
+  ],
+  "baseline_usage": {
+    "calls": 1,
+    "input_tokens": 1880,
+    "output_tokens": 1131,
+    "elapsed_seconds": 12.26
+  },
+  "multi_agent_usage": {
+    "calls": 9,
+    "input_tokens": 10072,
+    "output_tokens": 6043,
+    "elapsed_seconds": 80.49
+  },
+  "evaluation_usage": {
+    "calls": 1,
+    "input_tokens": 2600,
+    "output_tokens": 651,
+    "elapsed_seconds": 9.67
+  }
+}

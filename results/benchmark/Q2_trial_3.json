@@ -1,0 +1,141 @@
+{
+  "question_id": "Q2",
+  "trial": 3,
+  "model_provider": "openai",
+  "records": [
+    {
+      "architecture": "baseline",
+      "hypothesis": {
+        "id": "B1",
+        "title": "Claim-level evidence gating will reduce unsupported claims in generated hypotheses",
+        "description": "When an LLM is given retrieved literature, requiring it to attach each empirical premise in a proposed hypothesis to a specific supporting passage\u2014and to omit or label claims that cannot be supported\u2014will increase the factual reliability of its hypotheses compared with ordinary literature-conditioned generation.",
+        "reasoning": "The retrieved work on scientific knowledge-driven decoding reports improved task accuracy when generation is constrained by domain rules, while the code-refactoring study reports that tests and feedback can identify and repair failures. These findings motivate testing evidence constraints in hypothesis generation. Whether claim-level evidence gating helps this task is not established by the supplied literature.",
+        "supporting_evidence": [
+          "The abstract for \u201cScientific Knowledge-driven Decoding Constraints Improving the Reliability of LLMs\u201d reports higher accuracy with knowledge-based generation constraints than with vanilla generation across its evaluated scientific tasks.",
+          "The abstract for \u201cEvaluating and Improving the Reliability of LLM-Generated Code Refactorings\u201d describes using tests and feedback to detect and repair generation failures."
+        ],
+        "contradictory_evidence": [
+          "None of the supplied literature directly evaluates claim-level evidence verification for scientific hypothesis generation.",
+          "Evidence constraints could suppress plausible but genuinely novel hypotheses when relevant evidence is absent from the retrieved literature; this possibility is not tested in the supplied literature."
+        ],
+        "testable_prediction": "Randomly assign matched prompts and literature sets to ordinary generation or claim-level evidence-gated generation. Have blinded domain experts assess each hypothesis\u2019s factual premises against the supplied sources. The evidence-gated condition will have a higher proportion of hypotheses whose empirical premises are supported by the cited passages, with novelty and testability scored separately to measure any trade-off.",
+        "elo_rating": 1000.0,
+        "generation": 0
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_1",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 5,
+        "reasoning": 4,
+        "explanation": "The literature supports using constraints and feedback to improve reliability, but does not directly test claim-level evidence gating for scientific hypotheses. The randomized comparison and expert assessment make the prediction clear and practical."
+      },
+      "overall": 4.25
+    },
+    {
+      "architecture": "baseline",
+      "hypothesis": {
+        "id": "B2",
+        "title": "Independent post-generation evidence audits will improve hypothesis selection and calibration",
+        "description": "An independent verifier that checks generated hypotheses against retrieved literature for support, contradiction, and evidence gaps will improve the reliability of the final selected hypotheses more than asking the generating model to self-check in the same response.",
+        "reasoning": "The supplied literature describes iterative repair using analysis and feedback for code generation and evidence-informed belief updating for continual discovery. This suggests that a separate verification stage may catch unsupported or redundant claims that generation alone misses. The proposed comparison between independent verification and self-checking remains speculative because the retrieved abstracts do not directly test these approaches on scientific hypotheses.",
+        "supporting_evidence": [
+          "The abstract for \u201cEvaluating and Improving the Reliability of LLM-Generated Code Refactorings\u201d reports an iterative repair framework using static analysis, unit-test feedback, and explanation agents to address failures.",
+          "The abstract for \u201cEvidence-Informed LLM Beliefs for Continual Scientific Discovery\u201d describes updating beliefs using evidence from prior hypotheses and filtering search to avoid spurious rewards and redundancy."
+        ],
+        "contradictory_evidence": [
+          "The supplied literature does not directly compare independent verification with model self-checking for scientific hypothesis generation.",
+          "Verification may incorrectly reject hypotheses whose supporting evidence is indirect or whose novelty depends on combining findings across sources; the supplied literature does not quantify this risk."
+        ],
+        "testable_prediction": "Generate candidate hypotheses from the same prompts and retrieved sources, then randomly apply no verification, same-model self-checking, or independent-model evidence auditing before selection. Blinded experts will evaluate factual support and contradiction against the sources. The independent-audit condition will yield a higher proportion of selected hypotheses with accurate evidence characterizations than both comparison conditions, while its effect on expert-rated novelty will be measured separately.",
+        "elo_rating": 1000.0,
+        "generation": 0
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_2",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "Iterative feedback and evidence-informed belief updating provide indirect motivation, but independent audits versus same-model self-checking are not evaluated in the supplied work. The comparison and outcome measures are clear; expert adjudication and verifier setup require some implementation."
+      },
+      "overall": 4
+    },
+    {
+      "architecture": "multi_agent",
+      "hypothesis": {
+        "id": "E1_2",
+        "title": "Validated counterevidence, rather than counterevidence retrieval alone, is necessary for calibration gains",
+        "description": "Counterevidence checks will improve the calibration of scientific-hypothesis confidence only when the retrieved contradictory passages are verified to entail the alleged contradiction; asking a model to search for or summarize counterevidence without this validation will produce smaller or no calibration gains and may cause unwarranted confidence reductions.",
+        "reasoning": "A counterevidence search can expose selective support, but retrieval or interpretation errors can make weak, irrelevant, or misrepresented material appear decisive. Validating the relation between each passage and the hypothesis before confidence revision provides a testable mechanism for distinguishing useful challenge from indiscriminate skepticism. This refines the broad claim that contradiction checks help calibration by identifying a condition under which the effect should occur.",
+        "supporting_evidence": [
+          "The source-entailment hypothesis motivates checking generated evidence claims against retrieved source text, but describes this as a proposed application rather than established evidence.",
+          "The contradiction-check hypothesis motivates active searches for counterevidence and confidence updating, while acknowledging that the available evidence does not establish a calibration benefit."
+        ],
+        "contradictory_evidence": [
+          "Even accurately interpreted contradictory passages may not warrant lower confidence if they are methodologically weak, out of scope, or outweighed by stronger evidence.",
+          "Source-entailment verification itself can be inaccurate, particularly when the evidence depends on context, study design, or qualification in the surrounding text."
+        ],
+        "testable_prediction": "Use a randomized 2-by-2 experiment crossing counterevidence search (absent/present) with source-entailment validation of retrieved counterevidence (absent/present). Compare confidence against blinded expert reliability judgments and measure overconfidence on hypotheses with adjudicated contradictory evidence. The search-plus-validation condition should reduce calibration error and overconfidence more than search without validation; it should not systematically lower confidence on hypotheses for which retrieved passages do not entail a relevant contradiction.",
+        "elo_rating": 1016.0,
+        "generation": 1
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_3",
+        "grounding": 2,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "The supplied literature discusses belief updating and avoiding spurious discovery rewards, but not counterevidence validation or confidence calibration. The factorial design tests the stated condition directly, though expert adjudication and calibration measurement require careful setup."
+      },
+      "overall": 3.75
+    },
+    {
+      "architecture": "multi_agent",
+      "hypothesis": {
+        "id": "E1_1",
+        "title": "Claim-level source verification combined with counterevidence search improves both grounding and confidence calibration",
+        "description": "For LLM-generated scientific hypotheses, a workflow that checks each supporting and contradicting evidence claim against retrieved source text, then requires confidence revision when validated counterevidence is found, will reduce unsupported evidence claims and improve confidence calibration compared with support-only source verification.",
+        "reasoning": "Source-entailment checks address whether cited evidence actually supports the stated claim, while deliberate counterevidence search addresses selective retrieval. Combining them in a claim-level evidence ledger makes it possible to distinguish genuinely supported hypotheses from those that merely have plausible-sounding justifications. Requiring confidence revision links evidence quality to the model's stated uncertainty, rather than treating retrieval as a cosmetic citation step.",
+        "supporting_evidence": [
+          "The source hypothesis reports that literature on LLM hallucination and domain-specific knowledge constraints motivates checking generated claims against external evidence, while explicitly noting that this does not establish the proposed effect.",
+          "The contradiction-check hypothesis reports that evidence-informed beliefs and evolving evidence provide a rationale for updating confidence, but likewise notes that direct improvement in calibration has not been established."
+        ],
+        "contradictory_evidence": [
+          "The available evidence is indirect and does not demonstrate that combining source-entailment checks with counterevidence search improves either outcome.",
+          "Retrieval may miss relevant studies or surface low-quality contradictory material; validation errors could therefore reinforce incorrect revisions."
+        ],
+        "testable_prediction": "In a preregistered randomized study, compare (1) no verification, (2) source-entailment verification of support only, and (3) source-entailment verification of both support and counterevidence with required confidence revision. On a benchmark with expert-adjudicated evidence and reliability judgments, condition 3 should have fewer unsupported or misrepresented evidence claims and lower confidence-calibration error than conditions 1 and 2. Measure prediction specificity separately to test whether these gains come at the cost of less informative hypotheses.",
+        "elo_rating": 984.0,
+        "generation": 1
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_4",
+        "grounding": 2,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "The proposed combination of source verification, counterevidence search, and confidence revision is not directly supported or tested in the supplied literature. The three-condition study gives a clear comparison and measurable outcomes, with some practical burden in constructing adjudicated benchmarks."
+      },
+      "overall": 3.75
+    }
+  ],
+  "baseline_usage": {
+    "calls": 1,
+    "input_tokens": 2132,
+    "output_tokens": 962,
+    "elapsed_seconds": 10.5
+  },
+  "multi_agent_usage": {
+    "calls": 9,
+    "input_tokens": 10449,
+    "output_tokens": 6190,
+    "elapsed_seconds": 74.82
+  },
+  "evaluation_usage": {
+    "calls": 1,
+    "input_tokens": 2930,
+    "output_tokens": 506,
+    "elapsed_seconds": 6.16
+  }
+}

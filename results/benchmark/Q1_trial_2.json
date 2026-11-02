@@ -1,0 +1,135 @@
+{
+  "question_id": "Q1",
+  "trial": 2,
+  "model_provider": "openai",
+  "records": [
+    {
+      "architecture": "baseline",
+      "hypothesis": {
+        "id": "B1",
+        "title": "Claim-level evidence provenance reduces fabricated support in scientific hypotheses",
+        "description": "A hypothesis-generation system that links each factual premise and supporting-evidence statement to a verifiable passage in retrieved literature, and labels unsupported premises as speculation, will produce fewer fabricated or misattributed claims than a system given the same literature without claim-level provenance requirements.",
+        "reasoning": "The retrieved classification identifies unfounded fabrication and factual errors as distinct forms of distorted AI-generated content. Scientific hypotheses can inherit these errors when background claims or evidence are invented or overstated. Requiring explicit links between claims and source passages may make unsupported claims easier to detect before they enter a hypothesis, while preserving room for novel, clearly labeled speculation.",
+        "supporting_evidence": [
+          "The 2024 classification study identifies \u201cUnfounded fabrication\u201d and \u201cFactual errors\u201d among eight first-level error types in AI-generated content.",
+          "The 2025 LLM hallucination survey describes hallucinations as content that can diverge from input or established world knowledge and reviews mitigation approaches."
+        ],
+        "contradictory_evidence": [],
+        "testable_prediction": "In a preregistered comparison using identical literature packets and prompts, blinded reviewers will find a lower rate of unsupported factual claims and fabricated supporting evidence in hypotheses generated with claim-level provenance requirements than in hypotheses generated without them; measure novelty and testability separately to assess whether these are preserved.",
+        "elo_rating": 1000.0,
+        "generation": 0
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_1",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "The literature identifies fabricated and factual errors, supporting the problem being targeted, but does not evaluate claim-level provenance. The matched comparison and reviewer-rated outcomes are clearly testable and practically achievable; the proposed safeguard is a reasonable but unverified response."
+      },
+      "overall": 4
+    },
+    {
+      "architecture": "multi_agent",
+      "hypothesis": {
+        "id": "E1_1",
+        "title": "Separate evidence verification and uncertainty handling reduce distinct hypothesis-generation errors",
+        "description": "Scientific-hypothesis-generating systems that verify whether retrieved evidence entails factual premises and separately qualify or omit low-confidence inferences will produce fewer unsupported factual claims and fewer overconfident reasoning errors than systems using either safeguard alone or neither.",
+        "reasoning": "Evidence checks target whether factual premises are supported, whereas calibrated uncertainty and abstention target whether uncertain inferences are presented as settled. Treating these as separate safeguards may address different error types more effectively than relying on either alone. A factorial comparison can test both their individual effects and whether combining them provides additional benefit, while measuring output utility to identify costs.",
+        "supporting_evidence": [
+          "The supplied summary of H1 reports that a 2024 classification distinguishes factual errors from other forms of distorted information.",
+          "The supplied summaries of H1 and H2 describe hallucination detection and mitigation as active research areas, but do not establish the efficacy of either proposed safeguard."
+        ],
+        "contradictory_evidence": [
+          "The provided evidence does not establish that evidence checks or uncertainty handling reduce errors, individually or in combination.",
+          "Retrieval can return incomplete or misleading evidence, and abstention may reduce the number or usefulness of generated hypotheses."
+        ],
+        "testable_prediction": "In a randomized 2\u00d72 study using matched scientific prompts, vary whether systems use claim-level evidence-entailment checks and whether they can qualify or omit low-confidence claims. Blinded domain experts will rate the combined-safeguard condition as having fewer unsupported factual claims and fewer high-confidence reasoning errors per hypothesis than the no-safeguard condition; the study will also test whether the combined condition outperforms each single-safeguard condition and measure hypothesis count, usefulness, and novelty.",
+        "elo_rating": 984.0,
+        "generation": 1
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_2",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "The error categories and survey support concerns about factual and reasoning errors, but the literature does not establish the proposed verification or uncertainty safeguards. The factorial design makes the claims testable, though implementing and evaluating the safeguards requires meaningful system and expert-review resources."
+      },
+      "overall": 4
+    },
+    {
+      "architecture": "baseline",
+      "hypothesis": {
+        "id": "B2",
+        "title": "Independent contradiction checking reduces reasoning errors in generated hypotheses",
+        "description": "A two-stage system that first generates candidate scientific hypotheses and then uses an independent checker to test each candidate for contradictions with the supplied literature and with its own stated reasoning will produce fewer internally inconsistent or literature-conflicting hypotheses than one-stage generation.",
+        "reasoning": "The retrieved error classification includes logic errors and reasoning errors, while the LLM survey highlights divergence from user input and contradiction with previously generated context as hallucination phenomena. A separate checking stage focused on contradictions targets these error modes directly and differs from source-provenance checks, which primarily address unsupported factual claims.",
+        "supporting_evidence": [
+          "The 2024 classification study identifies \u201cLogic errors\u201d and \u201cReasoning errors\u201d as first-level error types.",
+          "The 2025 LLM hallucination survey describes hallucinations that contradict previously generated context or diverge from user input."
+        ],
+        "contradictory_evidence": [],
+        "testable_prediction": "For matched literature-based hypothesis-generation tasks, independent contradiction checking will reduce the proportion of candidates judged by blinded domain reviewers to conflict with the supplied evidence or with their own reasoning, compared with one-stage generation; reviewers will also score whether the checking stage unnecessarily rejects plausible, evidence-consistent novel hypotheses.",
+        "elo_rating": 1000.0,
+        "generation": 0
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_3",
+        "grounding": 4,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 5,
+        "explanation": "The literature explicitly describes contradictions with context and identifies logic and reasoning errors, directly grounding the target error modes. It does not demonstrate that an independent checker reduces them, but the comparison and outcomes provide a clear test of that plausible mechanism."
+      },
+      "overall": 4.5
+    },
+    {
+      "architecture": "multi_agent",
+      "hypothesis": {
+        "id": "E1_2",
+        "title": "Evidence-checking benefits depend on retrieval coverage and should be paired with coverage-aware qualification",
+        "description": "Claim-level evidence checking will reduce unsupported factual claims most reliably when the retrieval corpus covers the relevant literature; when coverage is poor, systems that explicitly qualify or omit claims lacking adequate evidence will make fewer unsupported assertions than systems that treat missing retrieved support as evidence against a claim.",
+        "reasoning": "Evidence-linked generation depends on what its retrieval corpus contains. A missing passage may reflect incomplete retrieval rather than a false premise, so an evidence check alone could encourage omissions or overstate the strength of a conclusion. Testing the effect across controlled levels of corpus coverage can distinguish genuine support verification from a system's dependence on retrieval availability.",
+        "supporting_evidence": [
+          "The supplied H1 summary proposes claim-level evidence checks but notes that their mitigation effect is not established by the provided abstracts.",
+          "The supplied H2 summary motivates qualifying or omitting low-confidence claims as a proposed response to unsupported inferences, not as an established effect."
+        ],
+        "contradictory_evidence": [
+          "The supplied summaries provide no direct evidence that corpus coverage moderates the effectiveness of evidence-linked generation.",
+          "Coverage and relevance are difficult to measure perfectly; evidence may exist in the corpus but still be missed or misinterpreted."
+        ],
+        "testable_prediction": "Across matched prompts, evaluate evidence-checking systems with retrieval corpora experimentally varied in relevant-source coverage, with and without a rule to qualify or omit claims when adequate support is unavailable. The difference in unsupported factual claims between evidence-checking and control systems will be larger at high coverage; at low coverage, coverage-aware qualification will reduce unsupported assertions relative to evidence checking without qualification. Also measure omissions, hypothesis usefulness, and novelty.",
+        "elo_rating": 1016.0,
+        "generation": 1
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_4",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 3,
+        "reasoning": 4,
+        "explanation": "The literature broadly discusses hallucination mitigation but does not address retrieval coverage or coverage-aware qualification, so the central conditional claim rests on assumptions. Varying corpus coverage offers a testable design, though controlling coverage and measuring omissions and utility add substantial complexity."
+      },
+      "overall": 3.75
+    }
+  ],
+  "baseline_usage": {
+    "calls": 1,
+    "input_tokens": 1157,
+    "output_tokens": 688,
+    "elapsed_seconds": 8.28
+  },
+  "multi_agent_usage": {
+    "calls": 9,
+    "input_tokens": 9185,
+    "output_tokens": 5707,
+    "elapsed_seconds": 70.55
+  },
+  "evaluation_usage": {
+    "calls": 1,
+    "input_tokens": 1856,
+    "output_tokens": 754,
+    "elapsed_seconds": 8.81
+  }
+}

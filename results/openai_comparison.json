@@ -1,0 +1,122 @@
+{
+  "research_goal": "How can AI systems reduce hallucinations when generating scientific hypotheses?",
+  "baseline_score": 7.5,
+  "multi_agent_score": 8.0,
+  "difference": 0.5,
+  "baseline_hypotheses": [
+    {
+      "id": "B1",
+      "title": "Evidence-linked hypothesis generation reduces unsupported claims",
+      "description": "Scientific hypothesis-generation systems that construct an explicit claim-to-evidence map from a provided literature corpus, and label or omit claims without support, will produce fewer unsupported factual and bibliographic assertions than systems prompted to generate hypotheses directly from the same corpus.",
+      "reasoning": "The supplied literature identifies unfounded fabrication and factual errors as categories of distorted AI-generated content, and a separate survey describes hallucination as a persistent reliability challenge. Requiring each factual premise to be traceable to the input literature may interrupt unsupported claims before they become part of a hypothesis. This intervention is a proposed mechanism; the supplied abstracts do not report tests of it.",
+      "supporting_evidence": [
+        "The 2024 classification study identified \u201cUnfounded fabrication\u201d and \u201cFactual errors\u201d among its first-level error types in analyzed ChatGPT content.",
+        "The 2025 survey describes hallucinations as content that can diverge from input or established knowledge and surveys mitigation approaches."
+      ],
+      "contradictory_evidence": [
+        "The retrieved literature does not directly test evidence-to-claim mapping for scientific hypothesis generation.",
+        "Restricting generation to a supplied corpus could suppress useful hypotheses that combine evidence in novel ways or draw on relevant knowledge absent from that corpus."
+      ],
+      "testable_prediction": "In a randomized evaluation using identical literature packets and prompts, systems required to provide a claim-to-evidence map and mark unsupported premises will have a lower rate of unsupported factual and bibliographic claims per generated hypothesis than direct-generation controls, as judged by blinded reviewers against the packets and verified references.",
+      "elo_rating": 1000.0,
+      "generation": 0
+    },
+    {
+      "id": "B2",
+      "title": "Error-type-specific review reduces distinct hallucination classes",
+      "description": "A post-generation review step that classifies candidate hypotheses by error type and applies a matching check\u2014such as logic checking for reasoning errors and source verification for factual or bibliographic claims\u2014will reduce overall hallucination rates more than a generic instruction to review for accuracy.",
+      "reasoning": "The 2024 study distinguishes multiple error classes, including logic errors, reasoning errors, unfounded fabrication, and factual errors. A review that targets the likely failure mode may detect errors that a single broad accuracy check misses. This is a testable extrapolation from the taxonomy, not a mitigation result established by the retrieved literature.",
+      "supporting_evidence": [
+        "The 2024 classification study reports eight first-level error types and 31 second-level types, including logic, reasoning, fabrication, and factual errors.",
+        "The 2025 survey reviews hallucination detection and mitigation and emphasizes the range of hallucination phenomena."
+      ],
+      "contradictory_evidence": [
+        "The supplied abstracts provide no comparative evaluation of error-type-specific review versus generic review.",
+        "Classification itself may be unreliable, and additional review steps could introduce new errors or consume resources without improving accuracy."
+      ],
+      "testable_prediction": "Across a blinded benchmark of generated scientific hypotheses containing independently annotated factual, bibliographic, and reasoning errors, an error-type-specific review condition will yield a lower post-review rate of each targeted error class than a generic-review condition, without a corresponding increase in unsupported claims.",
+      "elo_rating": 1000.0,
+      "generation": 0
+    }
+  ],
+  "multi_agent_hypotheses": [
+    {
+      "id": "E1_2",
+      "title": "Evidence-trace critique reduces inferential errors beyond factual grounding alone",
+      "description": "After generating a candidate hypothesis, a separate critique pass that inspects both the support for each factual premise and the inferential links from those premises to the conclusion will reduce reasoning and logic errors more than claim-level evidence checking alone.",
+      "reasoning": "Evidence gating can establish whether factual premises are supported without determining whether those premises justify the proposed conclusion. A critique that represents premise-to-conclusion links explicitly can target that remaining gap, while checking source support helps distinguish faulty inference from an unsupported premise. The benefit of this combined pass is a testable proposal, not an established result.",
+      "supporting_evidence": [
+        "The supplied 2024 classification treats logic and reasoning errors as distinct from factual errors and fabrication, suggesting that factual grounding alone may not address all error types.",
+        "The supplied hypotheses identify claim-level evidence gating and critique-and-revision as complementary strategies aimed at different error classes."
+      ],
+      "contradictory_evidence": [
+        "The provided evidence does not establish that an evidence-trace critique improves reasoning quality.",
+        "Critique and revision may introduce new errors, increase generation costs, or suppress plausible but novel hypotheses."
+      ],
+      "testable_prediction": "On a blinded benchmark with expert-annotated factual, reasoning, and logic errors, compare (1) claim-level evidence checking alone with (2) the same checking followed by an independent critique that flags unsupported premises, invalid premise-to-conclusion links, contradictions, and prompt mismatches before revision. The second condition should reduce expert-rated reasoning and logic errors, including among hypotheses whose factual premises are supported. Measure factual errors, novelty, and errors introduced during revision separately.",
+      "elo_rating": 1016.0,
+      "generation": 1
+    },
+    {
+      "id": "E1_1",
+      "title": "Entailment-based evidence gates outperform citation-presence checks at reducing unsupported claims",
+      "description": "For scientific hypothesis generation, verifying that retrieved source passages actually entail each atomic factual premise\u2014and omitting or explicitly qualifying premises that are not supported\u2014will reduce unsupported factual claims more than requiring citations without checking claim-to-source entailment.",
+      "reasoning": "A citation can be present without supporting the claim it accompanies. Applying the evidence gate at the level of individual factual premises, and allowing abstention when evidence is inadequate, targets both unsupported claims and this form of citation mismatch. This approach is not expected to resolve errors in the logic connecting supported premises to a hypothesis.",
+      "supporting_evidence": [
+        "The supplied 2024 classification distinguishes factual errors and unfounded fabrication from other error types, making unsupported factual premises a separable target.",
+        "The supplied 2025 survey describes hallucination mitigation as an active area and emphasizes that hallucination phenomena vary."
+      ],
+      "contradictory_evidence": [
+        "The provided evidence does not establish that entailment-based checking improves on citation-presence checks.",
+        "Source retrieval may fail or return incomplete evidence; a strict gate could omit valid premises or reduce hypothesis novelty."
+      ],
+      "testable_prediction": "Randomly assign scientific hypothesis-generation prompts to free generation, citation-presence-only, or claim-level entailment verification with unsupported-premise omission or qualification. Using the same source set across conditions, have blinded reviewers score the proportion of unsupported factual premises, citation-claim entailment, reasoning errors, and novelty. The entailment-gated condition should have fewer unsupported premises and mismatched citations than both alternatives; reasoning errors and novelty should be reported separately.",
+      "elo_rating": 984.0,
+      "generation": 1
+    }
+  ],
+  "baseline_evaluations": [
+    {
+      "hypothesis_id": "B1",
+      "plausibility": 8.0,
+      "novelty": 5.0,
+      "testability": 9.0,
+      "specificity": 9.0,
+      "reasoning_quality": 8.0,
+      "overall_score": 8.0,
+      "explanation": "The proposed mechanism\u2014requiring claims to be traceable to supplied sources\u2014plausibly reduces unsupported assertions, and the randomized comparison is concrete and testable. The rationale appropriately distinguishes the proposed intervention from evidence already established by the cited literature. Evidence mapping and source-grounding are not especially novel, and results may depend on corpus quality, reviewer agreement, and whether claim mapping itself introduces errors."
+    },
+    {
+      "hypothesis_id": "B2",
+      "plausibility": 7.0,
+      "novelty": 6.0,
+      "testability": 8.0,
+      "specificity": 8.0,
+      "reasoning_quality": 7.0,
+      "overall_score": 7.0,
+      "explanation": "Matching checks to error types is a reasonable, testable extension of an error taxonomy, but the taxonomy alone does not establish that targeted review will outperform generic review. The benchmark comparison is fairly specific; however, error categories may overlap, and demonstrating reduced rates for each targeted class without increasing unsupported claims will require careful annotation and adequate statistical power."
+    }
+  ],
+  "multi_agent_evaluations": [
+    {
+      "hypothesis_id": "E1_2",
+      "plausibility": 8.0,
+      "novelty": 6.0,
+      "testability": 9.0,
+      "specificity": 9.0,
+      "reasoning_quality": 9.0,
+      "overall_score": 8.0,
+      "explanation": "The proposed critique targets a genuine gap: supported premises do not necessarily entail a conclusion. The comparison and separately measured error categories make the prediction testable. The main caveats are that expert ratings may be subjective and that the critique pass could introduce errors or overlap substantially with the evidence-checking condition; the prediction appropriately proposes measuring revision errors."
+    },
+    {
+      "hypothesis_id": "E1_1",
+      "plausibility": 9.0,
+      "novelty": 5.0,
+      "testability": 9.0,
+      "specificity": 9.0,
+      "reasoning_quality": 9.0,
+      "overall_score": 8.0,
+      "explanation": "Checking whether cited passages support individual claims should plausibly reduce unsupported premises and citation mismatches relative to checking only for citation presence. The controlled conditions and separate outcome measures are well specified. The underlying principle is established and not especially novel, and outcomes may depend on source quality and reviewer agreement, but the proposed comparison is directly testable."
+    }
+  ]
+}

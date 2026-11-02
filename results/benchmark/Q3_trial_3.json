@@ -1,0 +1,142 @@
+{
+  "question_id": "Q3",
+  "trial": 3,
+  "model_provider": "openai",
+  "records": [
+    {
+      "architecture": "baseline",
+      "hypothesis": {
+        "id": "B1",
+        "title": "Budget-matched iterative critique increases independently rated hypothesis testability",
+        "description": "For a fixed scientific domain and generation budget, LLM-generated hypotheses that undergo at least one critique-and-revision cycle will be more testable than hypotheses produced by one-shot generation or by budget-matched independent sampling without critique.",
+        "reasoning": "Critique can expose underspecified variables, missing controls, and predictions that are not falsifiable, allowing revision to add operational details. However, iterative methods may benefit simply from additional generation opportunities, so critique must be compared with a budget-matched sampling baseline and judged using criteria not used by the revising model.",
+        "supporting_evidence": [
+          "The HypoEvolve abstract describes successive hypothesis-population updates that assess testability, but does not isolate the causal contribution of critique to testability.",
+          "The Nova abstract reports improvements from iterative planning and search in novelty and diversity, not testability, so iterative methods could plausibly improve some idea-quality dimensions without necessarily improving this one.",
+          "The code-quality review abstract cautions that improvements should be evaluated against budget-matched sampling and on measures independent of the technique's own feedback signal."
+        ],
+        "contradictory_evidence": [
+          "The supplied literature does not report a controlled test showing that iterative critique improves scientific-hypothesis testability.",
+          "Critique may make hypotheses sound more operational without making the proposed experiments feasible or informative; the retrieved code-quality review also warns that optimization against a feedback signal can fail to improve independent measures."
+        ],
+        "testable_prediction": "Randomly assign matched initial hypotheses to (a) one critique-and-revision cycle, (b) the same number of additional generation calls without critique, or (c) no additional calls, while matching total token or compute budgets. Blinded domain experts using a preregistered rubric will find a higher proportion of hypotheses in condition (a) meet all specified criteria\u2014measurable variables, a comparator or control, an operational method, and a falsifiable predicted outcome\u2014than in both comparison conditions. Evaluate feasibility separately from rubric scores.",
+        "elo_rating": 1000.0,
+        "generation": 0
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_1",
+        "grounding": 4,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 5,
+        "explanation": "The literature discusses scientific agents that assess hypothesis testability and emphasizes budget-matched comparisons and independent evaluation, though it does not directly establish that critique improves testability. The randomized conditions, budget controls, and blinded rubric make the prediction clear and practical to test."
+      },
+      "overall": 4.5
+    },
+    {
+      "architecture": "multi_agent",
+      "hypothesis": {
+        "id": "E1_1",
+        "title": "Critique that targets competing explanations improves the discriminability of generated hypotheses",
+        "description": "Compared with generic critique or equal-compute generation-only methods, structured critique that requires authors to specify plausible alternative explanations, controls, and outcomes that distinguish those alternatives will improve the practical discriminability of LLM-generated hypotheses\u2014not merely their rubric scores.",
+        "reasoning": "H1 proposes that operationalization-focused critique improves testability, while H2 identifies a risk that named variables and controls can raise rubric scores without making a test informative. Requiring an explicit link between each proposed measurement and a competing explanation addresses this weakness: it makes the revision task about whether an experiment can separate interpretations, rather than simply adding procedural detail. The claim remains empirical because additional structure could increase complexity without improving feasibility.",
+        "supporting_evidence": [
+          "The supplied HypoEvolve abstract describes successive hypothesis-population updates that assess testability, but does not establish that structured critique improves testability.",
+          "The supplied Nova summary reports adjacent evidence that iterative planning and search can improve some idea qualities; it does not directly test hypothesis discriminability."
+        ],
+        "contradictory_evidence": [
+          "There is no direct evidence in the supplied material that critique requiring explicit alternatives improves practical discriminability.",
+          "More detailed critique could increase hypothesis complexity or burden without producing feasible experiments."
+        ],
+        "testable_prediction": "Randomly assign initial hypotheses to (1) structured critique requiring explicit alternatives, controls, and distinguishing outcomes, (2) generic critique, or (3) equal-compute generation-only. Have blinded domain scientists assess rubric-based operationalization and, separately, feasibility and ability to distinguish the focal claim from prespecified plausible alternatives. The structured-critique group will outperform both controls on the independent discriminability assessment, not only on the rubric; preregister scoring rules and analyze results by domain.",
+        "elo_rating": 1016.0,
+        "generation": 1
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_2",
+        "grounding": 3,
+        "testability": 4,
+        "feasibility": 3,
+        "reasoning": 4,
+        "explanation": "The literature supports evaluating generated ideas with external or independent measures, but does not specifically address critique of competing explanations or experimental discriminability. The comparison and outcomes are defined, although identifying plausible alternatives and rating discriminability consistently across domains may be difficult."
+      },
+      "overall": 3.5
+    },
+    {
+      "architecture": "baseline",
+      "hypothesis": {
+        "id": "B2",
+        "title": "Operationalization-focused critique improves experimental executability more than generic critique",
+        "description": "A critique prompt that explicitly asks reviewers to identify measurable variables, controls, methods, and falsifiable outcomes will produce greater improvement in experimental executability than a generic request to improve a scientific hypothesis, even when both are followed by the same number of revision rounds and receive equal compute.",
+        "reasoning": "Generic critique may improve fluency or perceived rigor without resolving what an experiment would actually measure. Directing critique toward operational elements should focus revisions on details that allow an independent researcher to implement and potentially disconfirm the proposal. This tests whether critique structure, rather than iteration alone, drives gains in practical testability.",
+        "supporting_evidence": [
+          "The HypoEvolve abstract identifies assessment of evidence and testability as explicit roles in an iterative multi-agent framework, but does not establish which critique components are effective.",
+          "The code-quality review abstract reports that gains can depend on the optimized signal and recommends independent measures, motivating evaluation of executability rather than relying only on the critique model's own ratings.",
+          "The supplied survey abstract describes validation mechanisms as an important aspect of scientific agents but provides no direct comparison of critique formats."
+        ],
+        "contradictory_evidence": [
+          "No supplied study directly compares operationalization-focused and generic critique for scientific hypotheses.",
+          "A structured checklist could encourage formulaic details or increase apparent specificity without improving feasibility, informativeness, or falsifiability."
+        ],
+        "testable_prediction": "In a randomized, compute-matched comparison, hypotheses revised using operationalization-focused critique will receive higher blinded ratings for experimental executability than those revised using generic critique. Separately, independent domain experts given only the revised hypothesis and ordinary resources will more often agree on a concrete protocol specifying the intervention, comparison, measurement, and disconfirming result in the operationalization-focused condition; gains in this task should persist after controlling for perceived plausibility and writing quality.",
+        "elo_rating": 1000.0,
+        "generation": 0
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_3",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 5,
+        "explanation": "The literature supports structured scientific-agent workflows and evaluation of testability, but offers no direct evidence that operationalization-focused critique outperforms generic critique. The compute-matched comparison and two distinct outcomes provide a strong, testable design; expert protocol assessment is feasible with appropriate domain-specific sampling."
+      },
+      "overall": 4.25
+    },
+    {
+      "architecture": "multi_agent",
+      "hypothesis": {
+        "id": "E1_2",
+        "title": "Structured critique may increase rubric-visible detail more than experimentally useful testability",
+        "description": "Structured testability critique will tend to improve scores on criteria explicitly requested by the critique, such as naming controls and measurements, but will produce smaller or inconsistent gains in independent assessments of whether a feasible experiment can discriminate the hypothesis from plausible alternatives.",
+        "reasoning": "H1 predicts that operationalization-focused critique improves testability; H2 highlights a plausible gap between rubric performance and practical usefulness. This hypothesis makes that gap a comparative, measurable outcome rather than treating higher rubric scores as sufficient evidence of improvement. It also allows critique to help with some aspects of testability while failing to transfer to experimental discrimination.",
+        "supporting_evidence": [
+          "The supplied review of code-quality techniques cautions that a single automated quality signal can be gamed and recommends evaluation measures independent of the optimized signal; this is methodological motivation, not direct evidence about scientific hypotheses."
+        ],
+        "contradictory_evidence": [
+          "H1 offers a plausible mechanism by which structured critique could translate broad claims into measurable, falsifiable comparisons.",
+          "No supplied evidence directly establishes that critique's rubric gains will exceed its gains in independent assessments."
+        ],
+        "testable_prediction": "In a randomized comparison of structured testability critique, generic critique, and equal-compute generation-only, score revisions using both the critique-aligned rubric and a separate blinded assessment of experimental feasibility and discrimination from plausible alternatives. The structured-critique condition will show a larger pre-to-post standardized gain on the aligned rubric than on the independent assessment, with the difference estimated separately across scientific domains.",
+        "elo_rating": 984.0,
+        "generation": 1
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_4",
+        "grounding": 4,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 5,
+        "explanation": "The literature cautions that techniques can improve the signal they target without improving independent quality measures, which supports the proposed gap between rubric-visible detail and practical usefulness. The hypothesis specifies a randomized comparison and measurable differences between aligned and independent assessments."
+      },
+      "overall": 4.5
+    }
+  ],
+  "baseline_usage": {
+    "calls": 1,
+    "input_tokens": 1880,
+    "output_tokens": 1286,
+    "elapsed_seconds": 14.34
+  },
+  "multi_agent_usage": {
+    "calls": 9,
+    "input_tokens": 9851,
+    "output_tokens": 5636,
+    "elapsed_seconds": 78.44
+  },
+  "evaluation_usage": {
+    "calls": 1,
+    "input_tokens": 2667,
+    "output_tokens": 563,
+    "elapsed_seconds": 6.55
+  }
+}

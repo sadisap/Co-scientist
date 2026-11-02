@@ -1,0 +1,139 @@
+{
+  "question_id": "Q1",
+  "trial": 1,
+  "model_provider": "openai",
+  "records": [
+    {
+      "architecture": "baseline",
+      "hypothesis": {
+        "id": "B2",
+        "title": "Structured error-audit revision reduces multiple classes of hypothesis-generation errors",
+        "description": "A generation workflow that audits draft hypotheses for predefined error classes and revises or flags each suspected issue will produce fewer factual, reasoning, and logic errors than a workflow that uses an unstructured self-critique step.",
+        "reasoning": "The 2024 study proposes a taxonomy that separates distorted outputs into error types, including factual, reasoning, and logic errors. Applying these categories as an explicit audit checklist may direct review toward different failure modes that a general request to 'check the answer' could miss. This is a speculative extension: the supplied study classifies errors but does not establish that taxonomy-guided revision reduces them.",
+        "supporting_evidence": [
+          "The 2024 classification study reports eight first-level error types, including logic errors, reasoning errors, unfounded fabrication, and factual errors.",
+          "The 2025 survey covers hallucination taxonomies and mitigation approaches, supporting the relevance of distinguishing error types when designing evaluations."
+        ],
+        "contradictory_evidence": [
+          "No supplied source compares taxonomy-guided auditing with unstructured self-critique, so it is unknown whether the checklist improves accuracy or merely changes the kinds of errors produced."
+        ],
+        "testable_prediction": "With the same model, literature inputs, and revision budget, compare drafts revised using a predefined error-class checklist against drafts revised using unstructured self-critique. Independent reviewers using a preregistered rubric should observe fewer factual, reasoning, and logic errors in the checklist condition; unsupported claims and hypothesis novelty should be assessed as separate outcomes.",
+        "elo_rating": 1000.0,
+        "generation": 0
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_1",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "The literature supports classifying factual, reasoning, and logic errors, but does not show that a taxonomy-guided audit reduces them. The comparison and outcomes are clearly specified and appear feasible."
+      },
+      "overall": 4
+    },
+    {
+      "architecture": "multi_agent",
+      "hypothesis": {
+        "id": "E1_2",
+        "title": "Grounding and uncertainty instructions address different sources of unsupported claims",
+        "description": "In scientific generation, claim-level source grounding and explicit uncertainty/abstention instructions will have complementary effects: grounding will reduce unsupported claims across evidence-coverage levels, while uncertainty and abstention instructions will provide their largest additional reduction when the supplied literature is sparse.",
+        "reasoning": "Grounding targets whether factual premises are supported by retrieved material; uncertainty and abstention target whether unsupported specifics are asserted confidently when evidence is missing. Because these address distinct failure points, testing them jointly across controlled levels of literature coverage can determine whether they provide additive or coverage-dependent benefits instead of assuming either intervention alone is sufficient.",
+        "supporting_evidence": [
+          "The supplied 2024 classification identifies unfounded fabrication as distinct from other error types.",
+          "The supplied 2025 survey characterizes hallucination as a reliability challenge and reviews mitigation approaches."
+        ],
+        "contradictory_evidence": [
+          "The supplied summaries do not establish that either intervention works, or that their effects are complementary.",
+          "Uncertainty instructions may increase abstention or reduce useful specificity, and grounding may be ineffective when retrieved sources are themselves incomplete or incorrect."
+        ],
+        "testable_prediction": "Use a preregistered factorial experiment crossing claim-level passage grounding (present/absent) with uncertainty-and-abstention instructions (present/absent), and vary evidence coverage while holding prompts and model settings constant. Independent blinded assessment should show a grounding-associated reduction in unsupported claims at each coverage level, and a larger additional reduction from uncertainty instructions under sparse than under ample coverage; also measure testability and abstention to identify utility costs.",
+        "elo_rating": 1016.0,
+        "generation": 1
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_2",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "The literature identifies hallucination and discusses mitigation broadly, but does not directly support grounding or abstention instructions, or their proposed coverage-dependent effects. The factorial design makes the claims testable; implementation and evaluation would require careful control."
+      },
+      "overall": 4
+    },
+    {
+      "architecture": "baseline",
+      "hypothesis": {
+        "id": "B1",
+        "title": "Claim-level evidence provenance reduces unsupported scientific hypotheses",
+        "description": "Scientific-hypothesis generation systems that attach each factual premise to a retrieved evidence passage and reject or qualify premises that the passage does not support will produce fewer unsupported claims than systems that generate hypotheses from the same literature without claim-level evidence checks.",
+        "reasoning": "The supplied literature identifies unfounded fabrication and factual errors as distinct forms of AI-generated distortion, while the hallucination survey describes mitigation as an active research area. Making evidence support explicit at the premise level may interrupt the transition from plausible-sounding but ungrounded statements to a proposed hypothesis. This is a proposed mechanism; the supplied literature does not directly test it for scientific hypothesis generation.",
+        "supporting_evidence": [
+          "The 2024 classification study identifies unfounded fabrication and factual errors among its first-level error types.",
+          "The 2025 LLM hallucination survey reviews detection and mitigation approaches, indicating that hallucination reduction is a recognized research problem."
+        ],
+        "contradictory_evidence": [
+          "The supplied literature does not report a controlled test of claim-level provenance checks in scientific hypothesis generation; their effectiveness and possible effects on novelty remain uncertain."
+        ],
+        "testable_prediction": "Randomly assign a hypothesis-generation system to use either claim-level evidence linking with unsupported-claim qualification or ordinary generation, using identical literature inputs. Blinded reviewers should find a lower proportion of factual premises unsupported by the supplied sources in the evidence-linking condition, while novelty scores should be measured separately to detect any trade-off.",
+        "elo_rating": 1000.0,
+        "generation": 0
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_3",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "The literature identifies factual errors and unfounded fabrication and notes mitigation as an active area, but does not test claim-level evidence checks for hypothesis generation. The comparison and outcome are clear, though reliable annotation may take effort."
+      },
+      "overall": 4
+    },
+    {
+      "architecture": "multi_agent",
+      "hypothesis": {
+        "id": "E1_1",
+        "title": "Entailment-checked claim grounding reduces unsupported premises more reliably than citation requests",
+        "description": "For scientific-hypothesis generation, requiring each factual premise to be linked to a retrieved passage that an independent verifier confirms actually entails the premise will reduce unsupported factual claims more than merely asking the model to provide citations.",
+        "reasoning": "A citation can be present without supporting the claim it accompanies. Requiring claim-level links and checking whether the cited passage entails each claim operationalizes grounding more rigorously than citation presence alone, and makes the intervention's proposed mechanism directly measurable. The expected reduction is a testable extrapolation rather than an effect established by the supplied summaries.",
+        "supporting_evidence": [
+          "The supplied 2024 classification distinguishes unfounded fabrication and factual errors as forms of distorted AI-generated information.",
+          "The supplied 2025 survey describes hallucination as content that can diverge from input or established knowledge and reviews mitigation approaches."
+        ],
+        "contradictory_evidence": [
+          "The supplied summaries do not report experiments showing that claim-level grounding or entailment verification reduces unsupported claims.",
+          "Verification can itself be inaccurate, and stricter grounding may omit useful but genuinely novel hypotheses."
+        ],
+        "testable_prediction": "Randomly assign models to standard generation, citation-request, or claim-to-passage grounding with independent entailment verification, using identical prompts and literature. Blind assessors should find the lowest proportion of unsupported factual premises in the verification condition, with no meaningful reduction in the number of hypotheses meeting a prespecified testability rubric.",
+        "elo_rating": 984.0,
+        "generation": 1
+      },
+      "scores": {
+        "hypothesis_id": "Candidate_4",
+        "grounding": 3,
+        "testability": 5,
+        "feasibility": 4,
+        "reasoning": 4,
+        "explanation": "The literature supports concern about factual errors and fabrication, but does not compare citation requests with entailment-checked grounding. The three-condition experiment directly tests the claim, though verifier and assessor reliability would need attention."
+      },
+      "overall": 4
+    }
+  ],
+  "baseline_usage": {
+    "calls": 1,
+    "input_tokens": 1157,
+    "output_tokens": 860,
+    "elapsed_seconds": 10.33
+  },
+  "multi_agent_usage": {
+    "calls": 9,
+    "input_tokens": 8843,
+    "output_tokens": 5607,
+    "elapsed_seconds": 69.47
+  },
+  "evaluation_usage": {
+    "calls": 1,
+    "input_tokens": 1846,
+    "output_tokens": 529,
+    "elapsed_seconds": 5.91
+  }
+}
